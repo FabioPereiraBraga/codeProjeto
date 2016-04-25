@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+  Route::get('/clients','ClientsController@index');
+
+  Route::get('/clients/find/{id}','ClientsController@show');
+
+  Route::post('/clients','ClientsController@store');
+
+  Route::post('/clients/{id}','ClientsController@update');
+
+  Route::delete('/clients/{id}','ClientsController@destroy');

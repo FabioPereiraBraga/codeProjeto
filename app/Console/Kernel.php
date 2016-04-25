@@ -1,6 +1,6 @@
 <?php
 
-namespace Projeto\Console;
+namespace CodeProject\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

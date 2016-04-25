@@ -1,6 +1,6 @@
 <?php
 
-namespace Projeto\Jobs;
+namespace CodeProject\Jobs;
 
 use Illuminate\Bus\Queueable;
 

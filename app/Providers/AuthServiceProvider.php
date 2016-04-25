@@ -1,6 +1,6 @@
 <?php
 
-namespace Projeto\Providers;
+namespace CodeProject\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Projeto\Model' => 'Projeto\Policies\ModelPolicy',
+        'CodeProject\Model' => 'CodeProject\Policies\ModelPolicy',
     ];
 
     /**

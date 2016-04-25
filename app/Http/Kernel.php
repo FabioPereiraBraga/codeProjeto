@@ -1,6 +1,6 @@
 <?php
 
-namespace Projeto\Http;
+namespace CodeProject\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Projeto\Http\Middleware\EncryptCookies::class,
+        \CodeProject\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Projeto\Http\Middleware\VerifyCsrfToken::class,
+
     ];
 
     /**
@@ -26,8 +26,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Projeto\Http\Middleware\Authenticate::class,
+        'auth' => \CodeProject\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \Projeto\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \CodeProject\Http\Middleware\RedirectIfAuthenticated::class,
+        'csrf'=>\CodeProject\Http\Middleware\VerifyCsrfToken::class,
     ];
 }
