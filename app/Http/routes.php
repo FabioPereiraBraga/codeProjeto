@@ -11,17 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
-  Route::get('/clients','ClientsController@index');
 
-  Route::get('/clients/find/{id}','ClientsController@show');
+  Route::get('/client','ClientsController@index');
 
-  Route::post('/clients','ClientsController@store');
+  Route::get('/client/{id}','ClientsController@show');
 
-  Route::post('/clients/{id}','ClientsController@update');
+  Route::post('/client','ClientsController@store');
 
-  Route::delete('/clients/{id}','ClientsController@destroy');
+  Route::put('/client/{id}','ClientsController@update');
+
+  Route::delete('/client/{id}','ClientsController@destroy');

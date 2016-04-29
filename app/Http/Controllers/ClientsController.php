@@ -30,6 +30,7 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
+
         return Clients::create( $request->all());
     }
 
@@ -54,10 +55,20 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
-        return  Clients::where(['id'=>$id])
-                        ->update( $request->all() );
 
+       if( Clients::where(['id'=>$id])
+           ->update( $request->all() )) {
+           return[
+               'Error'=>false,
+               'mensagem'=>'Cliente alterado com succeso !'
+           ];
+       }
+
+
+            return [
+                'Error'=>true,
+                'mensagem'=>'Falha na alteração  do  cliente !'
+            ];
 
 
     }
@@ -70,7 +81,20 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-      return  Clients::destroy( $id );
+        if(  Clients::destroy( $id ) ){
+            return[
+                'Error'=>false,
+                'mensagem'=>'Cliente excluido com successo !'
+            ];
+        }
+
+
+              return [
+                  'Error'=>true,
+                  'mensagem'=>'Falha na deleção do Cliente !'
+              ];
+
+
 
 
     }
