@@ -23,3 +23,24 @@
   Route::put('/client/{id}','ClientsController@update');
 
   Route::delete('/client/{id}','ClientsController@destroy');
+
+
+
+
+Route::get('/project','ProjectController@index');
+
+Route::get('/project/{id}','ProjectController@show');
+
+Route::post('/project','ProjectController@store');
+
+Route::put('/project/{id}','ProjectController@update');
+
+Route::delete('/project/{id}','ProjectController@destroy');
+
+
+
+
+
+
+
+

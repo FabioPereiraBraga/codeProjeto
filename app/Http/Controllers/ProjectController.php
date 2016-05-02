@@ -2,25 +2,33 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repository\ClienteRepository;
-use CodeProject\Service\ClientService;
+use CodeProject\Repository\ProjectRepository;
+use CodeProject\Service\ProjectService;
+
 use Illuminate\Http\Request;
 
 
 
-class ClientsController extends Controller
+class ProjectController extends Controller
 {
+
     /**
-     * @var ClientRepositoryEloquent|ClienteRepository
+     * @var ProjectRepository
      */
     private $repository ;
-    private $servico;
+
     /**
-     * ClientsController constructor.
-     * @param ClienteRepository $repository
+     * @var ProjectsService
+     */
+    private $servico;
+
+    /**
+     * ProjectController constructor.
+     * @param ProjectRepository $repository
+     * @param ProjectsService $servico
      */
 
-    public function __construct( ClienteRepository $repository , ClientService $servico)
+    public function __construct( ProjectRepository $repository , ProjectService $servico)
     {
         $this->repository = $repository;
         $this->servico   = $servico;
@@ -34,10 +42,10 @@ class ClientsController extends Controller
 
     public function index()
     {
-       return $this->repository->all();
+        return $this->repository->with(['user' , 'client'])->all();
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -58,10 +66,10 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-     return  $this->repository->find($id);
+        return $this->repository->with(['user' , 'client'])->find($id);
     }
 
-   
+
     /**
      * Update the specified resource in storage.
      *
@@ -82,5 +90,24 @@ class ClientsController extends Controller
     public function destroy($id)
     {
         return $this->servico->delete( $id );
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function showUser($id)
+    {
+        
+        return $this->servico->findProjectUser( $id );
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function showCliente($id)
+    {
+        return $this->servico->findProjectClient( $id );
     }
 }
