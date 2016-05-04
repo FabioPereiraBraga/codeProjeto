@@ -1,5 +1,6 @@
 <?php
 namespace CodeProject\Validator;
+use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\LaravelValidator;
 
 /**
@@ -11,12 +12,15 @@ use Prettus\Validator\LaravelValidator;
 
 class ClientValidator extends  LaravelValidator
 {
+  
+    
     protected $rules = [
         'name' => 'required|max:225',
         'responsible'  => 'required|max:225',
         'email'=> 'required|email',
         'phone'=> 'required',
         'address'=> 'required'
+
     ];
 
 

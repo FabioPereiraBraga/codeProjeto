@@ -1,10 +1,11 @@
 <?php
 namespace  CodeProject\Service;
 
-use CodeProject\Entities\User;
 use CodeProject\Repository\ProjectRepository;
 use CodeProject\Validator\ProjectValidator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
+
 
 /**
  * Created by PhpStorm.
@@ -76,7 +77,19 @@ class ProjectService
 
             return[
                 'error'   =>true,
-                'message' =>$e->getMessage()
+                'message' =>$e->getMessageBag()
+            ];
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Projeto não encontrado.'
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro no update do projeto '
             ];
         }
 
@@ -89,20 +102,53 @@ class ProjectService
      */
     public function delete( $id )
     {
-        
-        if(  $this->repository->delete( $id ) ){
-            return[
-                'Error'=>false,
-                'mensagem'=>'Projeto excluido com successo !'
+        try {
+            $this->repository->delete($id);
+
+            return [
+                'Error' => false,
+                'mensagem' => 'Projeto excluido com successo !'
+            ];
+
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Projeto não encontrado.'
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro ao excluir o projeto.'
             ];
         }
 
 
-        return [
-            'Error'=>true,
-            'mensagem'=>'Falha na deleção do Projeto !'
-        ];
 
+
+    }
+
+
+    public function show( $id )
+    {
+        try{
+
+            return $this->repository->with(['user' , 'client'])->find($id);
+
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Projeto não encontrado.'
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro na busca do projeto'
+            ];
+        }
 
 
     }
