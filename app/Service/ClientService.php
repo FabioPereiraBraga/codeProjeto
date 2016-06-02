@@ -2,6 +2,8 @@
 namespace  CodeProject\Service;
 use CodeProject\Repository\ClienteRepository;
 use CodeProject\Validator\ClientValidator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
@@ -65,16 +67,29 @@ class ClientService
     {
         try {
 
-            $this->validator->with( $data)->passesOrFail();
+            $this->validator->with( $data )->passesOrFail();
             $this->repository->update( $data, $id);
+
+            return $this->repository->find( $id );
+
 
         } catch (ValidatorException $e) {
 
             return[
                 'error'   =>true,
-                'message' =>$e->getMessage()
+                'message' =>$e->getMessageBag()
             ];
-        }
+        } catch (ModelNotFoundException $e) {
+
+             return ['error'=>true,
+                     'mensage'=>'Cliente  não encontrado.'];
+
+        } catch (\Exception $e) {
+
+          return ['error'=>true,
+                  'mensage'=>'Ocorreu algum erro na atualização do cliente '];
+
+         }
 
 
     }
@@ -85,21 +100,58 @@ class ClientService
      */
     public function delete( $id )
     {
-        
-        if(  $this->repository->delete( $id ) ){
-            return[
-                'Error'=>false,
-                'mensagem'=>'Cliente excluido com successo !'
+        try{
+        $this->repository->delete( $id );
+            return [
+                'Error' => false,
+                'mensagem' => 'Cliente excluido com successo !'
             ];
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Cliente  não encontrado.'
+            ];
+
+        }catch (QueryException $e) {
+
+            return [
+                'error'=>true,
+                'mensage'=>'Projeto não pode ser apagado pois existe um ou mais clientes vinculados a ele.'
+            ];
+
+        } catch (\Exception $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro na deleção do cliente'];
+
         }
 
 
-        return [
-            'Error'=>true,
-            'mensagem'=>'Falha na deleção do Cliente !'
-        ];
 
+    }
 
+    public  function show($id)
+    {
+        try{
+
+        return $this->repository->find($id);
+
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Cliente  não encontrado.'
+            ];
+
+        } catch (\Exception $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro na consulta pelo cliente'];
+
+        }
 
     }
     

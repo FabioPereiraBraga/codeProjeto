@@ -66,7 +66,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return $this->repository->with(['user' , 'client'])->find($id);
+        return $this->servico->show( $id ); 
     }
 
 
