@@ -11,6 +11,7 @@ class ProjectNoteTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+       
+        factory(CodeProject\Entities\ProjectNote::class,10)->create();
     }
 }

@@ -27,11 +27,21 @@ class Project extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
+    public function members ()
+    {
+        return $this->hasMany(ProjectMembers::class, 'project_id');
+    }
+
 
 
     public function client ()
     {
         return $this->belongsTo(Clients::class,'client_id');
+    }
+
+    public function note()
+    {
+        return $this->hasMany(ProjectNote::class);
     }
 
 }

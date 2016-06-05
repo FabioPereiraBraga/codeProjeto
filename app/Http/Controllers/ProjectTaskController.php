@@ -2,22 +2,23 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repository\ProjectRepository;
-use CodeProject\Service\ProjectService;
+use CodeProject\Repository\ProjectTaskRepository;
+use CodeProject\Service\ProjectTaskService;
+
 use Illuminate\Http\Request;
 
 
 
-class ProjectController extends Controller
+class ProjectTaskController extends Controller
 {
 
     /**
-     * @var ProjectRepository
+     * @var ProjectTaskRepository
      */
     private $repository ;
 
     /**
-     * @var ProjectsService
+     * @var ProjectTaskService
      */
     private $servico;
 
@@ -27,7 +28,7 @@ class ProjectController extends Controller
      * @param ProjectsService $servico
      */
 
-    public function __construct( ProjectRepository $repository , ProjectService $servico)
+    public function __construct( ProjectTaskRepository $repository , ProjectTaskService $servico)
     {
         $this->repository = $repository;
         $this->servico   = $servico;
@@ -41,7 +42,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        return $this->repository->with(['user' , 'client'])->all();
+        return $this->repository->all();
     }
 
 
@@ -61,11 +62,12 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  int  $noteId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id )
     {
-        return $this->servico->show( $id ); 
+        return $this->servico->show($id);
     }
 
 
@@ -76,7 +78,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id )
     {
         return   $this->servico->update($request->all() , $id);
     }
@@ -86,34 +88,10 @@ class ProjectController extends Controller
      * @return array
      */
 
-    public function destroy($id)
+    public function destroy( $id )
     {
         return $this->servico->delete( $id );
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function showUser($id)
-    {
-        
-        return $this->servico->findProjectUser( $id );
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function showCliente($id)
-    {
-        return $this->servico->findProjectClient( $id );
-    }
-
-    public function members($id){
-
-
-       return $this->repository->with(['members'])->find($id);
-        
-    }
+    
 }

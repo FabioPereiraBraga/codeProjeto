@@ -1,8 +1,11 @@
 <?php
 namespace  CodeProject\Service;
 
+
+use CodeProject\Repository\ProjectMembersRepository;
 use CodeProject\Repository\ProjectRepository;
 use CodeProject\Validator\ProjectValidator;
+use CodeProject\Validator\ProjectMembersValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -26,16 +29,33 @@ class ProjectService
      */
     private $validator;
 
+
+    /**
+     * @var ProjectMembersRepository
+     */
+    private  $repositoryMember;
+    /**
+     * @var ProjectMembersValidator
+     */
+    private  $validatorMembers;
     /**
      * ProjectService constructor.
      * @param ProjectRepository $repository
      * @param ProjectValidator $validator
      */
     
-    public function __construct( ProjectRepository $repository , ProjectValidator $validator)
+    public function __construct( ProjectRepository $repository , ProjectValidator $validator , 
+                                 ProjectMembersRepository $members ,
+                                 ProjectMembersValidator   $validatorMembers
+                               )
     {
+
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->repositoryMember  = $members;
+        $this->validatorMembers  = $validatorMembers;
+
+
     }
 
     /**
@@ -153,6 +173,63 @@ class ProjectService
 
     }
 
+    public function addMember(array  $data ){
+
+        try {
+
+            $this->validatorMembers->with( $data )->passesOrFail();
+            return $$this->repositoryMember->create( $data );
+
+        } catch (ValidatorException $e) {
+
+            return[
+                'error'   =>true,
+                'message' =>$e->getMessageBag()
+            ];
+        }
+
+
+
+    }
+
+    public function isMember( $idUser , $id ){
+
+        try{
+
+       if( count( $this->repositoryMember->findWhere(['project_id'=>$id,'user_id'=>$idUser]) ) ) {
+           return 1;
+       }
+           return 0;
+
+        }catch (\Exception $e ){
+
+            return [
+                'error'=>true,
+                'menssagem'=>$e->getMessage()
+            ];
+
+        }
+
+
+    }
+
+    public function removeMember( $idUser ){
+
+        try{
+
+           return $this->repositoryMember->delete( $idUser );
+
+        }catch (\Exception $e ){
+
+            return [
+                'error'=>true,
+                'menssagem'=>$e->getMessage()
+            ];
+
+        }
+
+
+    }
 
 
     

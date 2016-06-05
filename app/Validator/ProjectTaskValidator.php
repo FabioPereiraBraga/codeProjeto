@@ -9,13 +9,14 @@ use Prettus\Validator\LaravelValidator;
  * Time: 17:29
  */
 
-class ProjectNoteValidator extends  LaravelValidator
+class ProjectTaskValidator extends  LaravelValidator
 {
     protected $rules = [
+        'name' => 'required',
         'project_id' => 'required',
-        'title'  => 'required',
-        'note'=> 'required'
-
+        'start_date' => 'required',
+        'due_date' => 'required',
+        'status' => 'required'
     ];
 
 

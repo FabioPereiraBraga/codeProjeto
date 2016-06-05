@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Repositories;
+namespace CodeProject\Repository;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ProjectRepository;
-use App\Entities\Project;
-use App\Validators\ProjectValidator;
+use CodeProject\Entities\ProjectMembers;
+use CodeProject\Validators\ProjectMembersValidator;
 
 /**
- * Class ProjectRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class ProjectMembersRepositoryEloquent
+ * @package namespace CodeProject\Repositories;
  */
-class ProjectRepositoryEloquent extends BaseRepository implements ProjectRepository
+class ProjectMembersRepositoryEloquent extends BaseRepository implements ProjectMembersRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +20,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
      */
     public function model()
     {
-        return Project::class;
+        return ProjectMembers::class;
     }
 
     

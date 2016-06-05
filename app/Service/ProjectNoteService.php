@@ -4,7 +4,6 @@ namespace  CodeProject\Service;
 
 use CodeProject\Repository\ProjectNoteRepository;
 use CodeProject\Validator\ProjectNoteValidator;
-use CodeProject\Validator\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 /**

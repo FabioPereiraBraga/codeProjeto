@@ -9,12 +9,11 @@ use Prettus\Validator\LaravelValidator;
  * Time: 17:29
  */
 
-class ProjectNoteValidator extends  LaravelValidator
+class ProjectMembersValidator extends  LaravelValidator
 {
     protected $rules = [
         'project_id' => 'required',
-        'title'  => 'required',
-        'note'=> 'required'
+        'user_id'  => 'required',
 
     ];
 

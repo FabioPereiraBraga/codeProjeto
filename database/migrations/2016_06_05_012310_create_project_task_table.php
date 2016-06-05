@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreteProjectNoteTable extends Migration
+class CreateProjectTaskTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class CreteProjectNoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_notes', function (Blueprint $table) {
+        Schema::create('project_tasks', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('project_id')->unsigned();;
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->string('title');
-            $table->text('note');
+            $table->date('start_date');
+            $table->date('due_date');
+            $table->integer('status');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreteProjectNoteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('project_notes');
+        Schema::drop('project_tasks');
     }
 }
