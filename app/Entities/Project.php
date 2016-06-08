@@ -29,7 +29,7 @@ class Project extends Model
 
     public function members ()
     {
-        return $this->hasMany(ProjectMembers::class, 'project_id');
+        return $this->belongsToMany(User::class, 'project_members','project_id', 'user_id');
     }
 
 

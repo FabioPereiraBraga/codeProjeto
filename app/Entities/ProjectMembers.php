@@ -17,12 +17,10 @@ class ProjectMembers extends Model implements Transformable
 
     public function user ()
     {
-
         return $this->belongsToMany(User::class, 'user_id');
     }
 
-
-
+    
     public function client ()
     {
         return $this->belongsToMany(Project::class,'project_id');
