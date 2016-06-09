@@ -47,6 +47,7 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
+     
         return $this->servico->create( $request->all());
     }
 

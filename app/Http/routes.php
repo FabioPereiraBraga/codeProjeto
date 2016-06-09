@@ -17,44 +17,36 @@ Route::post('oauth/access_token', function() {
 });
 
 
-Route::group([ 'middleware' => 'oauth' ] , function(){
+Route::group([ 'middleware' => 'oauth' ] , function() {
 
-  Route::resource('/client','ClientsController',['except'=>['create','edit'] ] );
+  Route::resource('/client', 'ClientsController', ['except' => ['create', 'edit']]);
 
-  Route::resource('project','ProjectController',['except'=>['create','edit'] ] );
-  
-  Route::group(['prefix'=>'project'],function(){
+  Route::resource('project', 'ProjectController', ['except' => ['create', 'edit']]);
+
+  Route::group(['prefix' => 'project'], function () {
 
 
-    Route::get('{id}/note','ProjectNoteController@index');
-    Route::get('{id}/note/{noteId}','ProjectNoteController@show');
-    Route::post('{id}/note','ProjectNoteController@store');
-    Route::put('{id}/note/{noteId}','ProjectNoteController@update');
-    Route::delete('{id}/note/{noteId}','ProjectNoteController@delete');
+    Route::get('{id}/note', 'ProjectNoteController@index');
+    Route::get('{id}/note/{noteId}', 'ProjectNoteController@show');
+    Route::post('{id}/note', 'ProjectNoteController@store');
+    Route::put('{id}/note/{noteId}', 'ProjectNoteController@update');
+    Route::delete('{id}/note/{noteId}', 'ProjectNoteController@delete');
 
-    Route::get('/tasks','ProjectTaskController@index');
-    Route::get('/tasks/{id}','ProjectTaskController@show');
-    Route::post('/tasks','ProjectTaskController@store');
-    Route::put('/tasks/{id}','ProjectTaskController@update');
-    Route::delete('/tasks/{id}','ProjectTaskController@destroy');
+    Route::get('/tasks', 'ProjectTaskController@index');
+    Route::get('/tasks/{id}', 'ProjectTaskController@show');
+    Route::post('/tasks', 'ProjectTaskController@store');
+    Route::put('/tasks/{id}', 'ProjectTaskController@update');
+    Route::delete('/tasks/{id}', 'ProjectTaskController@destroy');
 
   });
 
 
+  Route::post('{id}/file', 'ProjectFileController@store');
 
-
-
-
-
-
-
-
-
-
-  Route::get('/project/{id}/members','ProjectController@members');
-
+  Route::get('/project/{id}/members', 'ProjectController@members');
 
 });
+
 
 
 

@@ -1,6 +1,8 @@
 <?php
 namespace CodeProject\Repository;
+
 use CodeProject\Entities\Clients;
+use CodeProject\Presenters\ClientsPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
@@ -22,7 +24,9 @@ class ClientRepositoryEloquent   extends BaseRepository  implements ClienteRepos
     {
         return Clients::class;
     }
-}
-{
 
+    public function presenter()
+    {
+        return ClientsPresenter::class;
+    }
 }

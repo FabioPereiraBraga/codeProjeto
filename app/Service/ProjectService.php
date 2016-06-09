@@ -8,7 +8,8 @@ use CodeProject\Validator\ProjectValidator;
 use CodeProject\Validator\ProjectMembersValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
-
+use Illuminate\Contracts\Filesystem\Factory as Storage;
+use Illuminate\Filesystem\Filesystem   ;
 
 /**
  * Created by PhpStorm.
@@ -38,6 +39,10 @@ class ProjectService
      * @var ProjectMembersValidator
      */
     private  $validatorMembers;
+
+    private  $filesystem;
+
+    private $storage;
     /**
      * ProjectService constructor.
      * @param ProjectRepository $repository
@@ -46,7 +51,9 @@ class ProjectService
     
     public function __construct( ProjectRepository $repository , ProjectValidator $validator , 
                                  ProjectMembersRepository $members ,
-                                 ProjectMembersValidator   $validatorMembers
+                                 ProjectMembersValidator   $validatorMembers,
+                                 Filesystem $filesystem,
+                                 Storage $storage
                                )
     {
 
@@ -54,7 +61,8 @@ class ProjectService
         $this->validator = $validator;
         $this->repositoryMember  = $members;
         $this->validatorMembers  = $validatorMembers;
-
+        $this->filesystem        = $filesystem;
+        $this->storage           = $storage;
 
     }
 
@@ -231,6 +239,14 @@ class ProjectService
 
     }
 
+    public function createFile( array $projectFile )
+    {
+        $project = $this->repository->skipPresenter()->find($projectFile['project_id']);
+
+        $projectArquivo = $project->files()->create($projectFile) ;
+
+       $this->storage->put($projectArquivo->id.".".$projectFile['extension'],$this->filesystem->get($projectFile['file']));
+    }
 
     
 
