@@ -35,16 +35,7 @@ class ProjectFileController extends Controller
         $this->servico   = $servico;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
-    public function index()
-    {
-        return $this->repository->with(['user' , 'client'])->findWhere(['owner_id'=>\Authorizer::getResourceOwnerId() ]);
-    }
 
 
 
@@ -56,90 +47,26 @@ class ProjectFileController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('file');
-        $extension = $file->getClientOriginalExtension();
-
-        return $this->servico->createFile([
-            'file'=> $file,
-            'extension'=>$extension,
-             'name'=>$request->name,
-             'project_id'=>$request->project_id,
-            'description'=>$request->description
-        ]);
-
-
-        
+        return $this->servico->createFile( $request );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-       if( $this->checkProjectPermission( $id ) === false){
-           return ['error'=>'Access Forbidden' ];
-       }
-        return $this->servico->show( $id );
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        if( $this->checkProjectPermission( $id ) === false){
-            return ['error'=>'Access Forbidden' ];
-        }
-        return   $this->servico->update($request->all() , $id);
-    }
 
     /**
      * @param $id
      * @return array
      */
 
-    public function destroy($id)
+    public function destroy($id,$idProject)
     {
         if( $this->checkProjectPermission( $id ) === false){
             return ['error'=>'Access Forbidden' ];
         }
 
-        return $this->servico->delete( $id );
+        return $this->servico->deleteFile( $id ,$idProject );
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function showUser($id)
-    {
-        
-        return $this->servico->findProjectUser( $id );
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function showCliente($id)
-    {
-        return $this->servico->findProjectClient( $id );
-    }
-
-    public function members($id){
 
 
-       return $this->repository->with(['members'])->find($id);
-        
-    }
 
     private function checkeProjectOwner( $projectId  ){
 

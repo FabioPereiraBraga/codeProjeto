@@ -2,6 +2,8 @@
 
 namespace CodeProject\Repository;
 
+
+
 use Prettus\Repository\Eloquent\BaseRepository;
 use CodeProject\Entities\ProjectTask;
 
@@ -21,6 +23,11 @@ class ProjectTaskRepositoryEloquent extends BaseRepository implements ProjectTas
     {
         return ProjectTask::class;
     }
+
+    /**
+     * Boot up the repository, pushing criteria
+     */
+
 
 
 }

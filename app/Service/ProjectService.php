@@ -4,12 +4,14 @@ namespace  CodeProject\Service;
 
 use CodeProject\Repository\ProjectMembersRepository;
 use CodeProject\Repository\ProjectRepository;
+use CodeProject\Validator\ProjectFileValidator;
 use CodeProject\Validator\ProjectValidator;
 use CodeProject\Validator\ProjectMembersValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem   ;
+use Symfony\Component\HttpKernel\Exception\FatalErrorException;
 
 /**
  * Created by PhpStorm.
@@ -43,6 +45,8 @@ class ProjectService
     private  $filesystem;
 
     private $storage;
+
+    private $projectFileValidator;
     /**
      * ProjectService constructor.
      * @param ProjectRepository $repository
@@ -53,7 +57,8 @@ class ProjectService
                                  ProjectMembersRepository $members ,
                                  ProjectMembersValidator   $validatorMembers,
                                  Filesystem $filesystem,
-                                 Storage $storage
+                                 Storage $storage,
+                                 ProjectFileValidator $projectFileValidator
                                )
     {
 
@@ -63,6 +68,7 @@ class ProjectService
         $this->validatorMembers  = $validatorMembers;
         $this->filesystem        = $filesystem;
         $this->storage           = $storage;
+        $this->projectFileValidator = $projectFileValidator;
 
     }
 
@@ -158,6 +164,46 @@ class ProjectService
     }
 
 
+    /**
+     * @param $id
+     * @return array
+     */
+    public function deleteFile( $id , $idProject)
+    {
+        try {
+            $dataProject  = $this->repository->skipPresenter()->with(['files'])->find($idProject );
+            if(count($dataProject->files()->find($id)) !== 0) {
+                $dataProject->files()->find($id)->delete();
+
+                return [
+                    'Error' => false,
+                    'mensagem' => 'File excluido com successo !'
+                ];
+            }
+
+            return [
+                'error'=>false,
+                'mensagem'=>'Arquivo não encontrado !'
+            ];
+
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Projeto não encontrado.'
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro ao excluir o projeto.'
+            ];
+        }
+
+
+    }
+
+
     public function show( $id )
     {
         try{
@@ -239,13 +285,39 @@ class ProjectService
 
     }
 
-    public function createFile( array $projectFile )
+    public function createFile(  $request )
     {
-        $project = $this->repository->skipPresenter()->find($projectFile['project_id']);
+        try {
 
-        $projectArquivo = $project->files()->create($projectFile) ;
+            $file = $request->file('file');
+            $extension = (! empty($file)) ? $file->getClientOriginalExtension() : '';
 
-       $this->storage->put($projectArquivo->id.".".$projectFile['extension'],$this->filesystem->get($projectFile['file']));
+            $data = [
+                'file' => $file,
+                'extension' => $extension,
+                'name' => $request->name,
+                'project_id' => $request->project_id,
+                'description' => $request->description
+            ];
+
+            $this->projectFileValidator->with( $data )->passesOrFail();
+
+            $project = $this->repository->skipPresenter()->find($request->project_id);
+            $projectArquivo = $project->files()->create( $data );
+            $this->storage->put($projectArquivo->id . "." . $extension, $this->filesystem->get($file));
+
+        }catch (ValidatorException $e) {
+
+            return[
+                'error'   =>true,
+                'message' =>$e->getMessageBag()
+            ];
+        }catch (\Exception $e) {
+            return [
+                'error'=>true,
+                'mensagem'=>'Falha !'
+            ];
+        }
     }
 
     

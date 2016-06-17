@@ -8,15 +8,15 @@
 
 namespace CodeProject\Presenters;
 
-use CodeProject\Transformers\ProjectTransformer;
+use CodeProject\Transformers\ProjectTaskTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 
-class ProjectPresenter extends  FractalPresenter
+class ProjectTaskPresenter extends  FractalPresenter
 {
   public  function getTransformer()
   {
-      return new ProjectTransformer();
+      return new ProjectTaskTransformer();
   }
 
 }

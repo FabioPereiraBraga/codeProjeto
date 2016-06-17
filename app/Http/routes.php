@@ -21,12 +21,12 @@ Route::group([ 'middleware' => 'oauth' ] , function() {
 
   Route::resource('/client', 'ClientsController', ['except' => ['create', 'edit']]);
 
-  Route::resource('project', 'ProjectController', ['except' => ['create', 'edit']]);
+  Route::resource('/project', 'ProjectController', ['except' => ['create', 'edit']]);
 
   Route::group(['prefix' => 'project'], function () {
 
 
-    Route::get('{id}/note', 'ProjectNoteController@index');
+    Route::get('{id}/project', 'ProjectNoteController@index');
     Route::get('{id}/note/{noteId}', 'ProjectNoteController@show');
     Route::post('{id}/note', 'ProjectNoteController@store');
     Route::put('{id}/note/{noteId}', 'ProjectNoteController@update');
@@ -41,7 +41,8 @@ Route::group([ 'middleware' => 'oauth' ] , function() {
   });
 
 
-  Route::post('{id}/file', 'ProjectFileController@store');
+  Route::post('file', 'ProjectFileController@store');
+  Route::delete('{id}/file/{idProject}', 'ProjectFileController@destroy');
 
   Route::get('/project/{id}/members', 'ProjectController@members');
 
