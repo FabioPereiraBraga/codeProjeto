@@ -74,8 +74,12 @@
 		<script type="text/javascript" src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}" ></script>
 
 		<script type="text/javascript" src="{{ asset('build/js/app.js') }}" ></script>
+
 		<script type="text/javascript" src="{{ asset('build/js/controllers/login.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/home.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientList.js') }}" ></script>
+
+		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>
 
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
