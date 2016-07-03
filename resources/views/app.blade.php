@@ -7,7 +7,10 @@
 	<title>Laravel</title>
 
 	@if(Config::get('app.debug'))
-    <link rel="stylesheet" href="{{asset('build/css/vendor/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('build/css/app.css')}}" />
+    <link rel="stylesheet" href="{{asset('build/css/components.css')}}" />
+    <link rel="stylesheet" href="{{asset('build/css/flaticon.css')}}" />
+    <link rel="stylesheet" href="{{asset('build/css/font-awesome.css')}}" />
 	<link rel="stylesheet" href="{{asset('build/css/vendor/bootstrap-theme.min.css')}}" />
 	@else
 	<link rel="stylesheet" href="{{ elixir('css/all.css') }}" />
@@ -75,10 +78,15 @@
 
 		<script type="text/javascript" src="{{ asset('build/js/app.js') }}" ></script>
 
+		<!--===============CONTROLLER================-->
 		<script type="text/javascript" src="{{ asset('build/js/controllers/login.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/home.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientList.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientNew.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientEdit.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientRemove.js') }}" ></script>
 
+		 <!--==============SERVICE====================-->
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>
 
 	@else
