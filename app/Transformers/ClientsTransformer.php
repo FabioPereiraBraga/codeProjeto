@@ -19,6 +19,7 @@ class ClientsTransformer extends  TransformerAbstract
       {
 
           return[
+              'id'=>$clients->id,
               'name'=>$clients->name,
               'responsible'=>$clients->responsible,
               'email'=>$clients->email,

@@ -20,8 +20,9 @@ app.provider('appConfig' , function () {
     }
 })
 
-app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
-    function($routeProvider , OAuthProvider, OAuthTokenProvider  , appConfigProvider){
+app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
+    function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider){
+
 
 
     $routeProvider
@@ -37,6 +38,10 @@ app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProv
             templateUrl:'build/views/client/list.html',
             controller:'ClientListController'
         })
+        .when('/clients/:id/view',{
+            templateUrl:'build/views/client/view.html',
+            controller:'ClientViewController'
+        })
         .when('/clients/new',{
             templateUrl:'build/views/client/new.html',
             controller:'ClientNewController'
@@ -48,8 +53,28 @@ app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProv
         .when('/clients/:id/remove',{
             templateUrl:'build/views/client/remove.html',
             controller:'ClientRemoveController'
+        })
+
+
+
+        .when('/project/note',{
+            templateUrl:'build/views/project-note/list.html',
+            controller:'ClientListController'
+        })
+
+        .when('/project/note/new',{
+            templateUrl:'build/views/project-note/new.html',
+            controller:'ClientNewController'
+        })
+        .when('/project/note/:id/edit',{
+            templateUrl:'build/views/project-note/edit.html',
+            controller:'ClientEditController'
+        })
+        .when('/project/note/:id/remove',{
+            templateUrl:'build/views/project-note/remove.html',
+            controller:'ClientRemoveController'
         });
-        
+
 
 
             OAuthProvider.configure({

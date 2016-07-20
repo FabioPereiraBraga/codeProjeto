@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{asset('build/css/components.css')}}" />
     <link rel="stylesheet" href="{{asset('build/css/flaticon.css')}}" />
     <link rel="stylesheet" href="{{asset('build/css/font-awesome.css')}}" />
-	<link rel="stylesheet" href="{{asset('build/css/vendor/bootstrap-theme.min.css')}}" />
 	@else
 	<link rel="stylesheet" href="{{ elixir('css/all.css') }}" />
 	@endif
@@ -85,6 +84,7 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientNew.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientEdit.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientRemove.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientView.js') }}" ></script>
 
 		 <!--==============SERVICE====================-->
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>

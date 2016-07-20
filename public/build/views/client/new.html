@@ -10,11 +10,7 @@
 
 
 
-
-
-
-
-                    <div class="form-group" ng-class="{'has-error':!form.password.$valid && form.password.$touched}">
+                    <div class="form-group" ng-class="{'has-error':!form.name.$valid && form.name.$touched}">
                         <label class="col-md-4 control-label">Name</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="name" ng-model="client.name" required>
@@ -67,6 +63,15 @@
                         </div>
 
 
+                        <div class="form-group" ng-class="{'has-error':!form.obs.$valid && form.obs.$touched}">
+                            <label class="col-md-4 control-label"> Observação </label>
+                            <div class="col-md-6">
+                                <textarea  class="form-control" name="obs" ng-model="client.obs" ></textarea>
+                                <div ng-messages="form.obs.$error" class="help-block" ng-show="form.obs.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                </div>
+                            </div>
+                        </div>
 
 
 

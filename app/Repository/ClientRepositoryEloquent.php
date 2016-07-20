@@ -25,7 +25,7 @@ class ClientRepositoryEloquent   extends BaseRepository  implements ClienteRepos
         return Clients::class;
     }
 
-    /*public function presenter()
+   /* public function presenter()
     {
         return ClientsPresenter::class;
     }*/

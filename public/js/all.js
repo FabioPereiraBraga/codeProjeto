@@ -542,6 +542,23 @@ app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProv
         .when('/clients/:id/remove',{
             templateUrl:'build/views/client/remove.html',
             controller:'ClientRemoveController'
+        })
+        .when('/project/note',{
+            templateUrl:'build/views/project-note/list.html',
+            controller:'ClientListController'
+        })
+
+        .when('/project/note/new',{
+            templateUrl:'build/views/project-note/new.html',
+            controller:'ClientNewController'
+        })
+        .when('/project/note/:id/edit',{
+            templateUrl:'build/views/project-note/edit.html',
+            controller:'ClientEditController'
+        })
+        .when('/project/note/:id/remove',{
+            templateUrl:'build/views/project-note/remove.html',
+            controller:'ClientRemoveController'
         });
         
 
@@ -623,6 +640,18 @@ angular.module('app.service')
            });
            
        }]);
+angular.module('app.service')
+       .service('ProjectNote',['$resource','appConfig',function($resource,appConfig){
+
+           return $resource(appConfig.baseUrl+'project/:id',{id: '@id'},{
+               update:{
+                   method:'PUT'
+               }
+           });
+           
+       }]);
+
+
 angular.module('app.controllers')
     .controller('ClientEditController',
         ['$scope','$location','$routeParams','Client' ,function ($scope, $location, $routeParams, Client) {

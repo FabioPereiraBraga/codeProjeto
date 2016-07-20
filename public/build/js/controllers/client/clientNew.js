@@ -3,11 +3,13 @@ angular.module('app.controllers')
 
         $scope.client = new Client();
 
-        $scope.save = function(){
+        $scope.save = function() {
 
-            $scope.client.$save().then(function(){
-                $location.path('/clients');
-            });
+            if( $scope.form.$valid ) {
+                $scope.client.$save().then(function () {
+                    $location.path('/clients');
+                });
+            }
         }
 
       
