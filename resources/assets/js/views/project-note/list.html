@@ -10,24 +10,22 @@
                        <thead>
                        <tr>
                            <th> Id </th>
-                           <th> Name </th>
-                           <th> Responsible </th>
-                           <th> E-mail </th>
-                           <th> Phone </th>
+                           <th> Title </th>
+                           <th> Nota </th>
+
                        </tr>
                        </thead>
 
                        <tbody>
-                         <tr ng-repeat="o in clients">
+                         <tr ng-repeat="o in notes">
                              <td> {{o.id}} </td>
-                             <td> {{o.name}} </td>
-                             <td>{{o.resposible}} </td>
-                             <td>{{o.email}} </td>
-                             <td> {{o.phone }} </td>
+                             <td> {{o.title}} </td>
+                             <td>{{o.note | limitTo:80}} ... </td>
+
                              <td>
-                                 <a ng-href="#/clients/{{o.id}}/view">View </a> |
-                                 <a ng-href="#/clients/{{o.id}}/edit">Editar </a> |
-                                 <a ng-href="#/clients/{{o.id}}/remove">Excluir </a>
+
+                                 <a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}/edit">Editar </a> |
+                                 <a ng-href="#/project/{{o.project_id}}/notes/{{o.id}}/remove">Excluir </a>
                              </td>
                          </tr>
                        </tbody>

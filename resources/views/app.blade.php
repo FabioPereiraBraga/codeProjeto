@@ -89,8 +89,8 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteList.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteNew.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteEdit.js') }}" ></script>
-		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteView.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteRemove.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteShow.js') }}" ></script>
 
 		 <!--==============SERVICE====================-->
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>

@@ -1,10 +1,12 @@
 angular.module('app.controllers')
-    .controller('ProjectNoteFindListController',
-               ['$scope','ProjectNote' ,'$routeParams',
-      function ($scope, ProjectNote , $routeParams) {
+    .controller('ProjectNoteShowController',
+               ['$scope','ProjectNote' ,'$routeParams','$location',
+      function ($scope, ProjectNote , $routeParams , $location) {
 
-        $scope.notes = ProjectNote.get({id: $routeParams.id,idNote:$routeParams.idNote });
+        $scope.projectNote = ProjectNote.get({id: $routeParams.id,idNote:$routeParams.idNote });
 
-          console.log( $scope.notes);
-      
-    }]);
+          $scope.voltar  = function () {
+              $location.path('/project/'+$routeParams.id+'/notes');
+          }
+
+      }]);

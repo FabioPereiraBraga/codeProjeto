@@ -3,33 +3,45 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Listagen de Notas</div>
+                <div class="panel-heading">Visualizar de Notas</div>
                 <div class="panel-body">
 
-                   <table class="table table-condensed">
-                       <thead>
-                       <tr>
-                           <th> Id </th>
-                           <th> Title </th>
-                           <th> Nota </th>
-
-                       </tr>
-                       </thead>
+                    <form class="form-horizontal"  name="form" role="form" method="POST"  ng-submit="voltar()">
 
 
-                       <tbody>
-                         <tr ng-repeat="o in notes">
-                             <td> {{o.id}} </td>
-                             <td> {{o.title}} </td>
-                             <td>{{o.note }} </td>
+
+                        <div class="form-group" ng-class="{'has-error':!form.title.$valid && form.title.$touched}">
+                            <label class="col-md-4 control-label">Title</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="title" ng-model="projectNote.title" required>
+                                <div ng-messages="form.title.$error" class="help-block" ng-show="form.title.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                </div>
+                            </div>
+                        </div>
 
 
-                         </tr>
-                       </tbody>
-
-                   </table>
 
 
+                        <div class="form-group" ng-class="{'has-error':!form.note.$valid && form.note.$touched}">
+                            <label class="col-md-4 control-label"> Observação </label>
+                            <div class="col-md-6">
+                                <textarea  class="form-control" name="obs" ng-model="projectNote.note" ></textarea>
+                                <div ng-messages="form.note.$error" class="help-block" ng-show="form.note.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Voltar</button>
+                            </div>
+                        </div>
+
+                    </form>
 
                 </div>
             </div>

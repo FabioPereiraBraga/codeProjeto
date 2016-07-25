@@ -514,8 +514,9 @@ app.provider('appConfig' , function () {
     }
 })
 
-app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
-    function($routeProvider , OAuthProvider, OAuthTokenProvider  , appConfigProvider){
+app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
+    function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider){
+
 
 
     $routeProvider
@@ -531,6 +532,10 @@ app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProv
             templateUrl:'build/views/client/list.html',
             controller:'ClientListController'
         })
+        .when('/clients/:id/view',{
+            templateUrl:'build/views/client/view.html',
+            controller:'ClientViewController'
+        })
         .when('/clients/new',{
             templateUrl:'build/views/client/new.html',
             controller:'ClientNewController'
@@ -543,6 +548,9 @@ app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProv
             templateUrl:'build/views/client/remove.html',
             controller:'ClientRemoveController'
         })
+
+
+
         .when('/project/note',{
             templateUrl:'build/views/project-note/list.html',
             controller:'ClientListController'
@@ -560,7 +568,7 @@ app.config(['$routeProvider','OAuthProvider','OAuthTokenProvider','appConfigProv
             templateUrl:'build/views/project-note/remove.html',
             controller:'ClientRemoveController'
         });
-        
+
 
 
             OAuthProvider.configure({
@@ -635,8 +643,9 @@ angular.module('app.service')
 
            return $resource(appConfig.baseUrl+'client/:id',{id: '@id'},{
                update:{
-                   method:'PUT'
+                   method:'PUT',
                }
+
            });
            
        }]);
@@ -653,11 +662,13 @@ angular.module('app.service')
 
 
 angular.module('app.controllers')
-    .controller('ClientEditController',
-        ['$scope','$location','$routeParams','Client' ,function ($scope, $location, $routeParams, Client) {
+    .controller('ClientEditController', 
+                ['$scope','$location','$routeParams','Client' , 
+        function ($scope, $location, $routeParams, Client) {
 
             $scope.client = Client.get({id: $routeParams.id});
 
+          
             $scope.save = function () {
                 if ($scope.form.$valid) {
                  Client.update({id:$scope.client.id},$scope.client,function () {
@@ -683,11 +694,13 @@ angular.module('app.controllers')
 
         $scope.client = new Client();
 
-        $scope.save = function(){
+        $scope.save = function() {
 
-            $scope.client.$save().then(function(){
-                $location.path('/clients');
-            });
+            if( $scope.form.$valid ) {
+                $scope.client.$save().then(function () {
+                    $location.path('/clients');
+                });
+            }
         }
 
       
@@ -710,4 +723,91 @@ angular.module('app.controllers')
       
     }]);
 
+angular.module('app.controllers')
+    .controller('ClientViewController', 
+                ['$scope','$location','$routeParams','Client' , 
+        function ($scope, $location, $routeParams, Client) {
+
+            $scope.client = Client.get({id: $routeParams.id});
+
+          
+            $scope.voltar = function () {
+                $location.path('/clients');
+        }
+
+      
+    }]);
+
+angular.module('app.controllers')
+    .controller('ClientEditController', 
+                ['$scope','$location','$routeParams','Client' , 
+        function ($scope, $location, $routeParams, Client) {
+
+            $scope.client = Client.get({id: $routeParams.id});
+
+          
+            $scope.save = function () {
+                if ($scope.form.$valid) {
+                 Client.update({id:$scope.client.id},$scope.client,function () {
+                     $location.path('/clients');
+                 })
+
+
+                }
+        }
+
+      
+    }]);
+
+angular.module('app.controllers')
+    .controller('ClientListController',['$scope','Client' ,function ($scope, Client) {
+
+        $scope.clients = Client.query();
+
+      
+    }]);
+angular.module('app.controllers')
+    .controller('ClientNewController',['$scope','$location','Client' ,function ($scope, $location, Client) {
+
+        $scope.client = new Client();
+
+        $scope.save = function() {
+
+            if( $scope.form.$valid ) {
+                $scope.client.$save().then(function () {
+                    $location.path('/clients');
+                });
+            }
+        }
+
+      
+    }]);
+
+angular.module('app.controllers')
+    .controller('ClientRemoveController',
+        ['$scope','$location','$routeParams','Client' ,function ($scope, $location, $routeParams, Client) {
+
+            $scope.client = Client.get({id: $routeParams.id});
+
+            $scope.remove = function () {
+                $scope.client.$delete().then(function(){
+                    $location.path('/clients');
+                });
+
+
+        }
+
+      
+    }]);
+
+angular.module('app.controllers')
+    .controller('ProjectNoteFindListController',
+               ['$scope','ProjectNote' ,'$routeParams',
+      function ($scope, ProjectNote , $routeParams) {
+
+        $scope.notes = ProjectNote.get({id: $routeParams.id,idNote:$routeParams.idNote });
+
+          console.log( $scope.notes);
+      
+    }]);
 //# sourceMappingURL=all.js.map

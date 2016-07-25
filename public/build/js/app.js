@@ -23,6 +23,24 @@ app.provider('appConfig' , function () {
 app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
     function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider){
 
+        $httpProvider.defaults.transformResponse = function(data,headers){
+            var headersGetter = headers();
+
+            if( headersGetter['content-type'] == 'application/json' ||
+                headersGetter['content-type'] == 'text/json'
+               )
+            {
+                var dataJson = JSON.parse(data);
+
+                if(dataJson.hasOwnProperty('data'))
+                {
+                    dataJson = dataJson.data;
+                }
+                return dataJson;
+            }
+
+            return data;
+        };
 
 
     $routeProvider
@@ -55,31 +73,29 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             controller:'ClientRemoveController'
         })
 
-       .when('/project/:id/notes',{
+
+
+        .when('/project/:id/notes',{
             templateUrl:'build/views/project-note/list.html',
             controller:'ProjectNoteListController'
         })
-        .when('/project/:id/notes/:idNote',{
-            templateUrl:'build/views/project-note/view.html',
-            controller:'ProjectNoteViewController'
+
+        .when('/project/:id/notes/:idNote/show',{
+            templateUrl:'build/views/project-note/show.html',
+            controller:'ProjectNoteShowController'
         })
-        
-       .when('/project/:id/notes/:idNote/edit',{
+        .when('/project/:id/notes/new',{
+            templateUrl:'build/views/project-note/new.html',
+            controller:'ProjectNoteNewController'
+        })
+        .when('/project/:id/notes/:idNote/edit',{
             templateUrl:'build/views/project-note/edit.html',
             controller:'ProjectNoteEditController'
         })
         .when('/project/:id/notes/:idNote/remove',{
             templateUrl:'build/views/project-note/remove.html',
             controller:'ProjectNoteRemoveController'
-        })
-
-        .when('/project/:id/notes/new',{
-            templateUrl:'build/views/project-note/new.html',
-            controller:'ProjectNoteNewController'
-        })
-
-
-
+        });
 
 
 

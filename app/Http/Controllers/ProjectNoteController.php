@@ -43,7 +43,7 @@ class ProjectNoteController extends Controller
     public function index( $id )
     {
 
-        return $this->repository->skipPresenter()->findWhere(['project_id'=>$id]);
+        return $this->repository->findWhere(['project_id'=>$id]);
     }
 
 
@@ -68,8 +68,15 @@ class ProjectNoteController extends Controller
      */
     public function show($id , $noteId )
     {
-     return $this->repository->skipPresenter()->findWhere([ 'project_id'=>$id , 'id'=>$noteId ]);
+     $result = $this->repository->findWhere([ 'project_id'=>$id , 'id'=>$noteId ]);
 
+        if(isset($result['data']) && count($result['data']) === 1){
+            $result = [
+                'data'=>$result['data'][0]
+            ];
+        }
+
+        return $result;
 
     }
 
@@ -81,9 +88,10 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id , $noteId)
+    public function update(Request $request, $id)
     {
-        return   $this->servico->update($request->all() , $noteId);
+     
+        return   $this->servico->update($request->all() , $id);
     }
 
     /**
@@ -91,9 +99,9 @@ class ProjectNoteController extends Controller
      * @return array
      */
 
-    public function destroy($id , $noteId)
+    public function destroy($id)
     {
-        return $this->servico->delete( $noteId );
+        return $this->servico->delete( $id );
     }
 
     
