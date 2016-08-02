@@ -92,9 +92,17 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteRemove.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteShow.js') }}" ></script>
 
-		 <!--==============SERVICE====================-->
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectList.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectNew.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectEdit.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectRemove.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectView.js') }}" ></script>
+
+		<!--==============SERVICE====================-->
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/projectNote.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/project.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/user.js') }}" ></script>
 
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>

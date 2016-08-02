@@ -95,6 +95,29 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
         .when('/project/:id/notes/:idNote/remove',{
             templateUrl:'build/views/project-note/remove.html',
             controller:'ProjectNoteRemoveController'
+        })
+        
+        
+        
+        .when('/project',{
+            templateUrl:'build/views/project/list.html',
+            controller:'ProjectListController'
+        })
+        .when('/project/:id/view',{
+            templateUrl:'build/views/project/view.html',
+            controller:'ProjectViewController'
+        })
+        .when('/project/new',{
+            templateUrl:'build/views/project/new.html',
+            controller:'ProjectNewController'
+        })
+        .when('/project/:id/edit',{
+            templateUrl:'build/views/project/edit.html',
+            controller:'ProjectEditController'
+        })
+        .when('/project/:id/remove',{
+            templateUrl:'build/views/project/remove.html',
+            controller:'ProjectRemoveController'
         });
 
 
