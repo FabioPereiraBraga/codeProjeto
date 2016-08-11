@@ -154,7 +154,7 @@ class ProjectService
         } catch (\Exception $e) {
             return [
                 'error'=>true,
-                'mensagem'=>'Ocorreu algum erro ao excluir o projeto.'
+                'mensagem'=>$e->getMessage()
             ];
         }
 

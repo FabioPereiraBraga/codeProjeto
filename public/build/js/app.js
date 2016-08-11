@@ -9,7 +9,14 @@ angular.module('app.service',[ 'ngResource']);
 
 app.provider('appConfig' , function () {
     var config = {
-        baseUrl:'http://desenvolvimento-fluxo-projeto/'
+        baseUrl:'http://desenvolvimento-fluxo-projeto/',
+        project:{
+            status:[
+            {value:1,label:'Não Iniciado'},
+            {value:2,label:'Iniciado'},
+            {value:1,label:'Concluido'}
+            ]
+        }
     };
 
     return {
@@ -22,6 +29,8 @@ app.provider('appConfig' , function () {
 
 app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
     function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider){
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
         $httpProvider.defaults.transformResponse = function(data,headers){
             var headersGetter = headers();

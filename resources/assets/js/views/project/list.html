@@ -17,7 +17,7 @@
                            <th> status </th>
                            <th> due_date </th>
                            <th> name </th>
-                           <th> client_id </th>
+                           <th colspan="2"> Ações</th>
                        </tr>
                        </thead>
 
@@ -29,10 +29,10 @@
                              <td>{{o.status}} </td>
                              <td> {{o.due_date }} </td>
                              <td> {{o.name }} </td>
-                             <td> {{o.client_id }} </td>
                              <td>
-                                 <a ng-href="#/project/{{o.project_id}}/view">View </a> |
-                                 <a ng-href="#/project/{{o.project_id}}/edit">Editar </a> |
+                                 <a ng-href="#/project/{{o.project_id}}/edit">Editar </a>
+                                 </td>
+                             <td>
                                  <a ng-href="#/project/{{o.project_id}}/remove">Excluir </a>
                              </td>
                          </tr>

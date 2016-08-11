@@ -5,7 +5,8 @@ angular.module('app.controllers')
             $scope.project = Project.get({id: $routeParams.id});
 
             $scope.remove = function () {
-                $scope.project.$delete().then(function(){
+              
+                $scope.project.$delete({id:$scope.project.project_id}).then(function(){
                     $location.path('/project');
                 });
 
