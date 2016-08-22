@@ -103,6 +103,8 @@ class ProjectService
     {
         try {
 
+           
+
             $this->validator->with( $data)->passesOrFail();
             $this->repository->update( $data, $id);
             return   $this->repository->find($id);

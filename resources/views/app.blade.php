@@ -104,6 +104,8 @@
 		<script type="text/javascript" src="{{ asset('build/js/services/project.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/user.js') }}" ></script>
 
+		<!--==============FILTER====================-->
+		<script type="text/javascript" src="{{ asset('build/js/filters/date-br.js') }}" ></script>
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	@endif

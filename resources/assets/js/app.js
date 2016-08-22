@@ -1,21 +1,50 @@
 /**
  * Created by root on 26/06/16.
  */
-var app = angular.module('app',['ngRoute' ,'angular-oauth2', 'app.controllers','app.service'] );
+var app = angular.module('app',['ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters'] );
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);
+angular.module('app.filters',[]);
 angular.module('app.service',[ 'ngResource']);
 
 
-app.provider('appConfig' , function () {
+
+app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParamSerializerProvider) {
     var config = {
         baseUrl:'http://desenvolvimento-fluxo-projeto/',
         project:{
             status:[
-            {value:1,label:'Não Iniciado'},
-            {value:2,label:'Iniciado'},
-            {value:1,label:'Concluido'}
+            {value:'1',label:'Não Iniciado'},
+            {value:'2',label:'Iniciado'},
+            {value:'1',label:'Concluido'}
             ]
+        },
+        utils:{
+            transformRequest:function(data){
+              if(angular.isObject(data)){
+                 return  $httpParamSerializerProvider.$get()(data);
+              }
+                return data;
+            },
+            transformResponse: function (data,headers) {
+                var headersGetter = headers();
+
+                if( headersGetter['content-type'] == 'application/json' ||
+                    headersGetter['content-type'] == 'text/json'
+                )
+                {
+                    var dataJson = JSON.parse(data);
+
+                    if(dataJson.hasOwnProperty('data'))
+                    {
+                        dataJson = dataJson.data;
+                    }
+                    return dataJson;
+                }
+
+                return data;
+            }
+            
         }
     };
 
@@ -25,31 +54,15 @@ app.provider('appConfig' , function () {
             return config;
         }
     }
-})
+} ])
 
 app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
     function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider){
+
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-        $httpProvider.defaults.transformResponse = function(data,headers){
-            var headersGetter = headers();
-
-            if( headersGetter['content-type'] == 'application/json' ||
-                headersGetter['content-type'] == 'text/json'
-               )
-            {
-                var dataJson = JSON.parse(data);
-
-                if(dataJson.hasOwnProperty('data'))
-                {
-                    dataJson = dataJson.data;
-                }
-                return dataJson;
-            }
-
-            return data;
-        };
+        $httpProvider.defaults.transformRequest  = appConfigProvider.config.utils.transformRequest;
+        $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
 
     $routeProvider
@@ -149,7 +162,12 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
 
 
+
+
     app.run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) {
+
+     
+
         $rootScope.$on('oauth:error', function(event, rejection) {
             // Ignore `invalid_grant` error - should be catched on `LoginController`.
             if ('invalid_grant' === rejection.data.error) {

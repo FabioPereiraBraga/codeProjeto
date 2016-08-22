@@ -9,7 +9,6 @@
 namespace CodeProject\Transformers;
 
 use CodeProject\Entities\Project;
-use CodeProject\Entities\ProjectMembers;
 use League\Fractal\TransformerAbstract;
 
 class ProjectTransformer extends  TransformerAbstract
@@ -20,9 +19,10 @@ class ProjectTransformer extends  TransformerAbstract
       {
           return[
               'project_id'=>$project->id,
-              'cliente_id'=>$project->client_id,
+              'client_id'=>$project->client_id,
               'owner_id'=>$project->owner_id,
               'name'=>$project->name,
+              'client'=>$project->client,
               'description'=>$project->description,
               'progress'=>$project->progress,
               'status'=>$project->status,
@@ -38,7 +38,12 @@ class ProjectTransformer extends  TransformerAbstract
     }
 
 
-   
-    
+
+
+
+
+
+
+
 
 }
