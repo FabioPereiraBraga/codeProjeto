@@ -1,7 +1,9 @@
 /**
  * Created by root on 26/06/16.
  */
-var app = angular.module('app',['ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters'] );
+var app = angular.module('app',['ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
+                                'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls'
+]);
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);
 angular.module('app.filters',[]);
@@ -61,7 +63,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-        $httpProvider.defaults.transformRequest  = appConfigProvider.config.utils.transformRequest;
+        $httpProvider.defaults.transformRequest  =
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
 

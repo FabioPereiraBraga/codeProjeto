@@ -3,14 +3,12 @@
 namespace CodeProject\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Clients extends Model implements Transformable
+
+class Clients extends Model
 {
 
-      use TransformableTrait;
-      
+
       protected $fillable = [
           'name',
           'responsible',
@@ -19,10 +17,7 @@ class Clients extends Model implements Transformable
           'address',
           'obs'
 ];
+      
 
-      public function project ()
-      {
-            return $this->hasMany(Project::class);
-      }
     
 }

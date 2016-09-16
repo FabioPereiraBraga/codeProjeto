@@ -13,7 +13,7 @@ use League\Fractal\TransformerAbstract;
 
 class ProjectTransformer extends  TransformerAbstract
 {
-    protected $defaultIncludes = ['members'];
+    protected $defaultIncludes = ['members','note'];
 
       public function transform(Project $project)
       {
@@ -22,9 +22,8 @@ class ProjectTransformer extends  TransformerAbstract
               'client_id'=>$project->client_id,
               'owner_id'=>$project->owner_id,
               'name'=>$project->name,
-              'client'=>$project->client,
               'description'=>$project->description,
-              'progress'=>$project->progress,
+              'progress'=>(int) $project->progress,
               'status'=>$project->status,
               'due_date'=>$project->due_date
           ];
@@ -36,6 +35,13 @@ class ProjectTransformer extends  TransformerAbstract
 
         return $this->collection($project->members, new ProjectMembersTransformer());
     }
+
+    public function includeNote(Project $project)
+    {
+
+        return $this->collection($project->note, new ProjectNoteTransformer());
+    }
+
 
 
 
