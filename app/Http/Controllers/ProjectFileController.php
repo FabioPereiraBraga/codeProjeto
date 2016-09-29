@@ -102,7 +102,6 @@ class ProjectFileController extends Controller
         if( $this->service->checkProjectPermission( $id ) === false){
             return ['error'=>'Acesso Forbidden'];
         }
-dd($request->all());
         return $this->service->update($request->all() , $id );
     }
 
@@ -118,7 +117,7 @@ dd($request->all());
             return ['error'=>'Access Forbidden' ];
         }
 
-          $this->servico->delete( $id  );
+          $this->repository->delete( $id  );
     }
 
 

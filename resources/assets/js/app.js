@@ -70,7 +70,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-        $httpProvider.defaults.transformRequest  =
+        $httpProvider.defaults.transformRequest  = appConfigProvider.config.utils.transformRequest;
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
 
@@ -141,7 +141,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             templateUrl:'build/views/project-file/edit.html',
             controller:'ProjectFileEditController'
         })
-        .when('/project/:id/file/:idNote/remove',{
+        .when('/project/:id/files/:idFile/remove',{
             templateUrl:'build/views/project-file/remove.html',
             controller:'ProjectFileRemoveController'
         })

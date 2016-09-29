@@ -17,7 +17,9 @@ angular.module('app.controllers')
 
                     //Notes.update({ id:$id }, note);
                  
-               ProjectFile.update({id:null,idFile:$routeParams.idFile},$scope.projectFile);
+               ProjectFile.update({id:null,idFile:$routeParams.idFile},$scope.projectFile,function(){
+                   $location.path('/project/'+$routeParams.id+'/files');
+               });
 
 
                 }

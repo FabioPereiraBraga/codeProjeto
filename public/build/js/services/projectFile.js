@@ -12,9 +12,6 @@ angular.module('app.service')
                'update': {
                    method:'PUT',
                    isArray:false,
-                   transformRequest:function(data,hearder,status){
-                       console.log(data);
-                   }
                },
                'download':{
                    url:url+'/download',

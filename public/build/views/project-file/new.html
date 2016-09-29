@@ -38,16 +38,13 @@
                             <label class="col-md-4 control-label"> File </label>
                             <div class="col-md-6">
 
-                               <div class="btn btn-sm btn-primary"
+                               <div class="btn btn-sm btn-info"
                                      ngf-select
                                      ng-model="projectFile.file"
                                      ngf-resize="{width: 50, height: 50}"
                                      name="file">Select</div>
 
-
-
-
-
+                                  {{projectFile.file.name}}
 
                                 <div ng-messages="form.file.$error" class="help-block" ng-show="form.file.$touched">
                                     <div class="" ng-message="required"> Campo Obigatorio</div>
