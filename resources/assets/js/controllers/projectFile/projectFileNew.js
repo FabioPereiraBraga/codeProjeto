@@ -19,7 +19,7 @@ angular.module('app.controllers')
                       },
                       file: $scope.projectFile.file
                   }).success(function(data,status,headers,config){
-                      //$location.path('/project/'+$routeParams.id+'/files');
+                      $location.path('/project/'+$routeParams.id+'/files');
                       console.log('file'+config.file.name+'upload . response'+data);
                   });
 

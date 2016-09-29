@@ -8,6 +8,7 @@ use CodeProject\Validator\ProjectFileValidator;
 use CodeProject\Validator\ProjectValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Request;
+use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem   ;
@@ -73,9 +74,10 @@ class ProjectFileService
 
 
            
-            $this->validator->with($data)->passesOrFail();
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
           
-            $project = $this->repository->skipPresenter()->find($data['project_id']);
+            $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
+            
             $projectArquivo = $project->files()->create( $data );
             $this->storage->put($projectArquivo->id . "." . $data['extension'], $this->filesystem->get($data['file']));
 
@@ -84,11 +86,6 @@ class ProjectFileService
             return[
                 'error'   =>true,
                 'message' =>$e->getMessageBag()
-            ];
-        }catch (\Exception $e) {
-            return [
-                'error'=>true,
-                'mensagem'=>'Falha !'
             ];
         }
 
@@ -104,9 +101,8 @@ class ProjectFileService
     {
         try {
 
-           
 
-            $this->validator->with( $data)->passesOrFail();
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
             $this->repository->update( $data, $id);
             return   $this->repository->find($id);
 
@@ -199,6 +195,12 @@ class ProjectFileService
             return true;
         }
         return false;
+    }
+
+    public function getFileName($id)
+    {
+        $projectFile = $this->repository->skipPresenter()->find($id);
+        return $projectFile->getFileName();
     }
 
 

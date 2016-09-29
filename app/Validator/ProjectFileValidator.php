@@ -1,5 +1,6 @@
 <?php
 namespace CodeProject\Validator;
+use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\LaravelValidator;
 
 /**
@@ -12,11 +13,20 @@ use Prettus\Validator\LaravelValidator;
 class ProjectFileValidator extends  LaravelValidator
 {
     protected $rules = [
-        'file' => 'required|mimes:pdf,jpeg,bmp,png,mp4,jpg',
-        'extension'  => 'required',
-        'name'=> 'required',
-        'project_id'=> 'required',
-        'description'=> 'required'
+       ValidatorInterface::RULE_CREATE =>[
+            'file' => 'required|mimes:pdf,jpeg,bmp,png,mp4,jpg',
+            'extension'  => 'required',
+            'name'=> 'required',
+            'project_id'=> 'required',
+            'description'=> 'required'
+        ],
+        ValidatorInterface::RULE_UPDATE =>[
+
+            'name'=> 'required',
+            'project_id'=> 'required',
+            'description'=> 'required'
+        ]
+
 
     ];
 

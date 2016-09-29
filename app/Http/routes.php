@@ -44,10 +44,10 @@ Route::group([ 'middleware' => 'oauth' ] , function() {
 
 
     Route::get('{id}/file', 'ProjectFileController@index');
-    Route::get('{id}/file/{fileId}', 'ProjectFileController@show');
-    Route::get('{id}/file/{fileId}/download', 'ProjectFileController@showFile');
+    Route::get('file/{fileId}', 'ProjectFileController@show');
+    Route::get('file/{fileId}/download', 'ProjectFileController@showFile');
     Route::post('{id}/file', 'ProjectFileController@store');
-    Route::put('{id}/file', 'ProjectFileController@update');
+    Route::put('file/{fileId}', 'ProjectFileController@update');
     Route::delete('{id}/file', 'ProjectFileController@destroy');
 
   });

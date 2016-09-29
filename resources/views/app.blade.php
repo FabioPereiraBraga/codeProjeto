@@ -116,6 +116,9 @@
 
 		<!--==============FILTER====================-->
 		<script type="text/javascript" src="{{ asset('build/js/filters/date-br.js') }}" ></script>
+
+		<!--==============DIRECTIVES====================-->
+		<script type="text/javascript" src="{{ asset('build/js/directives/projectFileDownload.js') }}" ></script>
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	@endif

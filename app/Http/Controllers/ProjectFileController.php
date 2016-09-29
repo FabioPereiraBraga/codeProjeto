@@ -38,7 +38,7 @@ class ProjectFileController extends Controller
 
    public function index( $id )
    {
-       $this->repository->findWhere(['id'=>$id]);
+      return $this->repository->findWhere(['project_id'=>$id]);
    }
 
 
@@ -85,7 +85,16 @@ class ProjectFileController extends Controller
             return ['error'=>'Access Forbidden'];
         }
         
-        return response()->download($this->service->getFilePath($id));
+        $filePath = $this->service->getFilePath($id);
+        $fileContent = file_get_contents( $filePath );
+        $file64 = base64_encode( $fileContent );
+        
+        return[
+        'file'=> $file64,
+        'size'=>filesize( $filePath ),
+         'name'=>$this->service->getFileName($id)
+        ];
+
     }
 
     public function update( Request $request , $id )
@@ -93,6 +102,7 @@ class ProjectFileController extends Controller
         if( $this->service->checkProjectPermission( $id ) === false){
             return ['error'=>'Acesso Forbidden'];
         }
+dd($request->all());
         return $this->service->update($request->all() , $id );
     }
 
