@@ -2,12 +2,12 @@
 
 namespace CodeProject\Http\Controllers;
 
+
+use CodeProject\Repository\ProjectFileRepository;
 use CodeProject\Repository\ProjectRepository;
-use CodeProject\Service\ProjectService;
+use CodeProject\Service\ProjectFileService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+
 
 
 class ProjectFileController extends Controller
@@ -21,7 +21,7 @@ class ProjectFileController extends Controller
     /**
      * @var ProjectsService
      */
-    private $servico;
+    private $service;
 
     /**
      * ProjectController constructor.
@@ -29,14 +29,17 @@ class ProjectFileController extends Controller
      * @param ProjectsService $servico
      */
 
-    public function __construct( ProjectRepository $repository , ProjectService $servico)
+    public function __construct( ProjectFileRepository $repository , ProjectFileService $service)
     {
         $this->repository = $repository;
-        $this->servico   = $servico;
+        $this->service   = $service;
     }
 
 
-
+   public function index( $id )
+   {
+       $this->repository->findWhere(['id'=>$id]);
+   }
 
 
     /**
@@ -47,7 +50,50 @@ class ProjectFileController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->servico->createFile( $request );
+
+        $file = $request->file('file');
+        $extension = (! empty($file)) ? $file->getClientOriginalExtension() : '';
+
+
+
+        $data = [
+            'file' => $file,
+            'extension' => $extension,
+            'name' => $request->name,
+            'project_id' => $request->project_id,
+            'description' => $request->description
+        ];
+
+     
+
+        return  $this->service->create( $data );
+
+    }
+    
+    
+    public function show( $id )
+    {
+        if( $this->service->checkProjectPermission( $id ) === false){
+            return ['error'=>'Acesso Forbidden'];
+        }
+        return $this->repository->find( $id );
+    }
+
+    public function showFile( $id )
+    {
+        if( $this->service->checkProjectPermission( $id ) === false){
+            return ['error'=>'Access Forbidden'];
+        }
+        
+        return response()->download($this->service->getFilePath($id));
+    }
+
+    public function update( Request $request , $id )
+    {
+        if( $this->service->checkProjectPermission( $id ) === false){
+            return ['error'=>'Acesso Forbidden'];
+        }
+        return $this->service->update($request->all() , $id );
     }
 
 
@@ -56,41 +102,19 @@ class ProjectFileController extends Controller
      * @return array
      */
 
-    public function destroy($id,$idProject)
+    public function destroy($id)
     {
-        if( $this->checkProjectPermission( $id ) === false){
+        if( $this->service->checkProjectPermission( $id ) === false){
             return ['error'=>'Access Forbidden' ];
         }
 
-        return $this->servico->deleteFile( $id ,$idProject );
+          $this->servico->delete( $id  );
     }
 
 
 
 
-    private function checkeProjectOwner( $projectId  ){
-
-        $userId = \Authorizer::getResourceOwnerId() ;
-        return $this->repository->isOwner ($projectId , $userId );
-
-    }
-
-    private function checkeProjectMember( $projectId  ){
-
-        $userId = \Authorizer::getResourceOwnerId() ;
-        return $this->repository->hasMember ($projectId , $userId );
-
-    }
-
-    private function checkProjectPermission( $projectId )
-    {
-
-        if($this->checkeProjectOwner( $projectId ) or
-          $this->checkeProjectMember( $projectId ) ){
-            return true;
-        }
-        return false;
-    }
+    
 
 
 

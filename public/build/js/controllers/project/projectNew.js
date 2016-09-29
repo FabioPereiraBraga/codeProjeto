@@ -20,8 +20,9 @@ angular.module('app.controllers')
                                        return '';
                                    };
 
-                                   $scope.getClients = function(name)
+                                   $scope.getClients = function(event,name)
                                    {
+                                    
                                        return Client.query({
                                            search:name,
                                            searchFields:'name:like'

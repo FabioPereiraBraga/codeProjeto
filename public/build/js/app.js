@@ -1,8 +1,11 @@
 /**
  * Created by root on 26/06/16.
  */
-var app = angular.module('app',['ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
-                                'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls'
+var app = angular.module('app',
+    [
+        'ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
+        'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls',
+        'ngFileUpload'
 ]);
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);
@@ -20,6 +23,9 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
             {value:'2',label:'Iniciado'},
             {value:'1',label:'Concluido'}
             ]
+        },
+        urls:{
+            projectFile:'/project/{{id}}/file/{{idFile}}'
         },
         utils:{
             transformRequest:function(data){
@@ -120,6 +126,26 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             templateUrl:'build/views/project-note/remove.html',
             controller:'ProjectNoteRemoveController'
         })
+
+
+        .when('/project/:id/file',{
+            templateUrl:'build/views/project-file/list.html',
+            controller:'ProjectNoteListController'
+        })
+       .when('/project/:id/file/new',{
+            templateUrl:'build/views/project-file/new.html',
+            controller:'ProjectFileNewController'
+        })
+        .when('/project/:id/file/:idNote/edit',{
+            templateUrl:'build/views/project-file/edit.html',
+            controller:'ProjectFileEditController'
+        })
+        .when('/project/:id/file/:idNote/remove',{
+            templateUrl:'build/views/project-file/remove.html',
+            controller:'ProjectFileRemoveController'
+        })
+
+
         
         
         
