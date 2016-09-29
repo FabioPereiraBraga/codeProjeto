@@ -26,7 +26,8 @@
                             <div class="col-md-6">
 
                                 <input type="text" name="client_id" class="form-control"
-                                       ng-model="clientSelect"
+                                       ng-model="clientSelect",
+                                       ng-ke="$event.preventDefault()",
                                        typeahead="o as o.name for o in getClients($viewValue) |limitTo:4"
                                        typeahead-input-formatter="formatName($model)"
                                        typeahead-on-select="selectClient($item)"

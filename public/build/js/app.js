@@ -1,12 +1,16 @@
 /**
  * Created by root on 26/06/16.
  */
-var app = angular.module('app',['ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
-                                'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls'
+var app = angular.module('app',
+    [
+        'ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
+        'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls',
+        'ngFileUpload','app.directives'
 ]);
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);
 angular.module('app.filters',[]);
+angular.module('app.directives',[]);
 angular.module('app.service',[ 'ngResource']);
 
 
@@ -20,6 +24,9 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
             {value:'2',label:'Iniciado'},
             {value:'1',label:'Concluido'}
             ]
+        },
+        urls:{
+            projectFile:'project/{{id}}/file/{{idFile}}'
         },
         utils:{
             transformRequest:function(data){
@@ -63,7 +70,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-        $httpProvider.defaults.transformRequest  =
+        $httpProvider.defaults.transformRequest  = appConfigProvider.config.utils.transformRequest;
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
 
@@ -120,6 +127,26 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             templateUrl:'build/views/project-note/remove.html',
             controller:'ProjectNoteRemoveController'
         })
+
+
+        .when('/project/:idProject/files',{
+            templateUrl:'build/views/project-file/list.html',
+            controller:'ProjectFileListController'
+        })
+       .when('/project/:id/file/new',{
+            templateUrl:'build/views/project-file/new.html',
+            controller:'ProjectFileNewController'
+        })
+        .when('/project/:id/files/:idFile/edit',{
+            templateUrl:'build/views/project-file/edit.html',
+            controller:'ProjectFileEditController'
+        })
+        .when('/project/:id/files/:idFile/remove',{
+            templateUrl:'build/views/project-file/remove.html',
+            controller:'ProjectFileRemoveController'
+        })
+
+
         
         
         

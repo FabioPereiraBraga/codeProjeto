@@ -74,6 +74,7 @@
 		<script type="text/javascript" src="{{ asset('build/js/vendor/angular-cookies.min.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/vendor/query-string.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/vendor/ng-file-upload.min.js') }}" ></script>
 
 		<script type="text/javascript" src="{{ asset('build/js/app.js') }}" ></script>
 
@@ -98,14 +99,26 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectRemove.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectView.js') }}" ></script>
 
+
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileList.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileNew.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileEdit.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileRemove.js') }}" ></script>
+
+
 		<!--==============SERVICE====================-->
+		<script type="text/javascript" src="{{ asset('build/js/services/url.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/projectNote.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/projectFile.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/project.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/user.js') }}" ></script>
 
 		<!--==============FILTER====================-->
 		<script type="text/javascript" src="{{ asset('build/js/filters/date-br.js') }}" ></script>
+
+		<!--==============DIRECTIVES====================-->
+		<script type="text/javascript" src="{{ asset('build/js/directives/projectFileDownload.js') }}" ></script>
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	@endif
