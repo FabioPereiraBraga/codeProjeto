@@ -18,4 +18,11 @@ class ProjectTask extends Model implements Transformable
         'status'
     ];
 
+    public function project ()
+    {
+        return $this->hasOne(Project::class,'project_id');
+    }
+
+    
+
 }

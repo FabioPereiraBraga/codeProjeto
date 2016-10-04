@@ -48,7 +48,7 @@ class ProjectFileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $id)
     {
 
         $file = $request->file('file');
@@ -60,7 +60,7 @@ class ProjectFileController extends Controller
             'file' => $file,
             'extension' => $extension,
             'name' => $request->name,
-            'project_id' => $request->project_id,
+            'project_id' => $id,
             'description' => $request->description
         ];
 
@@ -71,38 +71,33 @@ class ProjectFileController extends Controller
     }
     
     
-    public function show( $id )
+    public function show( $id , $fileId)
     {
-        if( $this->service->checkProjectPermission( $id ) === false){
-            return ['error'=>'Acesso Forbidden'];
-        }
-        return $this->repository->find( $id );
+
+        return $this->repository->find( $fileId );
     }
 
-    public function showFile( $id )
+    public function showFile( $id , $fileId)
     {
-        if( $this->service->checkProjectPermission( $id ) === false){
-            return ['error'=>'Access Forbidden'];
-        }
-        
-        $filePath = $this->service->getFilePath($id);
+
+        $filePath = $this->service->getFilePath($fileId);
         $fileContent = file_get_contents( $filePath );
         $file64 = base64_encode( $fileContent );
         
         return[
         'file'=> $file64,
         'size'=>filesize( $filePath ),
-         'name'=>$this->service->getFileName($id)
+         'name'=>$this->service->getFileName($fileId)
         ];
 
     }
 
-    public function update( Request $request , $id )
+    public function update( Request $request , $id , $fileId )
     {
-        if( $this->service->checkProjectPermission( $id ) === false){
-            return ['error'=>'Acesso Forbidden'];
-        }
-        return $this->service->update($request->all() , $id );
+
+        $data =  $request->all();
+        $data['project_id'] = $id;
+        return $this->service->update($data, $fileId );
     }
 
 
@@ -111,13 +106,10 @@ class ProjectFileController extends Controller
      * @return array
      */
 
-    public function destroy($id)
+    public function destroy($id , $fileId)
     {
-        if( $this->service->checkProjectPermission( $id ) === false){
-            return ['error'=>'Access Forbidden' ];
-        }
 
-          $this->repository->delete( $id  );
+          $this->repository->delete( $fileId  );
     }
 
 

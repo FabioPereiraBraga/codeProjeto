@@ -54,9 +54,11 @@ class ProjectNoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $id)
     {
-        return $this->servico->create( $request->all());
+        $data =  $request->all();
+        $data['project_id'] = $id;
+        return $this->servico->create( $data );
     }
 
     /**
@@ -88,10 +90,11 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id , $idNote)
     {
-     
-        return   $this->servico->update($request->all() , $id);
+        $data =  $request->all();
+        $data['project_id'] = $id;
+        return   $this->servico->update($data, $idNote);
     }
 
     /**
@@ -99,9 +102,9 @@ class ProjectNoteController extends Controller
      * @return array
      */
 
-    public function destroy($id)
+    public function destroy($id , $idNote )
     {
-        return $this->servico->delete( $id );
+        return $this->servico->delete( $idNote );
     }
 
     

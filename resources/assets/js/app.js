@@ -25,6 +25,13 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
             {value:'1',label:'Concluido'}
             ]
         },
+        projectTask:{
+            status:[
+                {value:'1',label:'Não Iniciado'},
+                {value:'2',label:'Iniciado'},
+                {value:'1',label:'Concluido'}
+            ]
+        },
         urls:{
             projectFile:'project/{{id}}/file/{{idFile}}'
         },
@@ -146,10 +153,46 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             controller:'ProjectFileRemoveController'
         })
 
+          // Rotas Project Member
 
-        
-        
-        
+        .when('/project/:id/members',{
+            templateUrl:'build/views/project-member/list.html',
+            controller:'ProjectMemberListController'
+        })
+        .when('/project/:id/member/new',{
+            templateUrl:'build/views/project-member/new.html',
+            controller:'ProjectMemberNewController'
+        })
+        .when('/project/:id/member/:idFile/edit',{
+            templateUrl:'build/views/project-member/edit.html',
+            controller:'ProjectMemberEditController'
+        })
+        .when('/project/:id/member/:idFile/remove',{
+            templateUrl:'build/views/project-member/remove.html',
+            controller:'ProjectMemberRemoveController'
+        })
+
+         // Rotas Project Task
+
+        .when('/project/:id/task',{
+            templateUrl:'build/views/project-task/list.html',
+            controller:'ProjectTaskListController'
+        })
+        .when('/project/:id/task/new',{
+            templateUrl:'build/views/project-task/new.html',
+            controller:'ProjectTaskNewController'
+        })
+        .when('/project/:id/task/:idTask/edit',{
+            templateUrl:'build/views/project-task/edit.html',
+            controller:'ProjectTaskEditController'
+        })
+        .when('/project/:id/task/:idTask/remove',{
+            templateUrl:'build/views/project-task/remove.html',
+            controller:'ProjectTaskRemoveController'
+        })
+
+        // Rotas Project
+
         .when('/project',{
             templateUrl:'build/views/project/list.html',
             controller:'ProjectListController'

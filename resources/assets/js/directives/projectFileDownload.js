@@ -32,7 +32,7 @@ angular.module('app.directives')
                         $(anchor).addClass('disabled').text('Loading...');
 
                         ProjectFile.download({
-                            'id':null,
+                            'id':$attrs.idProject,
                             'idFile':$attrs.idFile
                         }, function(data){
 

@@ -322,6 +322,37 @@ class ProjectService
         }
     }
 
+
+    /**
+     * @param $projectFileId
+     * @return mixed
+     */
+
+    public function checkeProjectOwner( $projectId  ){
+
+        $userId = \Authorizer::getResourceOwnerId() ;
+        return $this->repository->isOwner ($projectId , $userId );
+
+    }
+
+    private function checkeProjectMember( $projectId  ){
+
+        $userId = \Authorizer::getResourceOwnerId() ;
+        return $this->repository->hasMember ($projectId , $userId );
+
+    }
+
+    public function checkProjectPermission( $projectId)
+    {
+
+
+        if($this->checkeProjectOwner( $projectId ) or
+            $this->checkeProjectMember( $projectId ) ){
+            return true;
+        }
+        return false;
+    }
+    
     
 
 }

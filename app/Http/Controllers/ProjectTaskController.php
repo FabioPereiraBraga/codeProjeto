@@ -40,7 +40,7 @@ class ProjectTaskController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index( $id )
     {
         return $this->repository->all();
     }
@@ -53,9 +53,11 @@ class ProjectTaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $id)
     {
-        return $this->servico->create( $request->all());
+        $data =  $request->all();
+        $data['project_id'] = $id;
+        return $this->servico->create( $data );
     }
 
     /**
@@ -65,9 +67,9 @@ class ProjectTaskController extends Controller
      * @param  int  $noteId
      * @return \Illuminate\Http\Response
      */
-    public function show($id )
+    public function show($id , $idTask )
     {
-        return $this->servico->show($id);
+        return $this->servico->show($idTask);
     }
 
 
@@ -78,9 +80,12 @@ class ProjectTaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id )
+    public function update(Request $request, $id , $idTask)
     {
-        return   $this->servico->update($request->all() , $id);
+        $data =  $request->all();
+        $data['project_id'] = $id;
+        
+        return   $this->servico->update($data, $idTask );
     }
 
     /**
@@ -88,7 +93,7 @@ class ProjectTaskController extends Controller
      * @return array
      */
 
-    public function destroy( $id )
+    public function destroy( $id , $idTask)
     {
         return $this->servico->delete( $id );
     }

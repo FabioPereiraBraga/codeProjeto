@@ -1,0 +1,42 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Listagen de Membros de Projetos</div>
+                <div class="panel-body">
+
+                    <p>
+                       Name: {{ projectMember.name }}
+                    </p>
+
+                    <p>
+                       Description: {{ projectMember.description }}
+                    </p>
+
+                    <table class="table table-condensed table-responsive">
+                       <thead>
+                       <tr>
+                           <th> Name </th>
+
+                       </tr>
+                       </thead>
+
+                       <tbody>
+                         <tr ng-repeat="o in projectMember.members.data">
+
+                             <td> {{o.name}} </td>
+
+                         </tr>
+                       </tbody>
+
+                   </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

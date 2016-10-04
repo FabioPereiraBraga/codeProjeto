@@ -105,12 +105,23 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileEdit.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileRemove.js') }}" ></script>
 
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectMember/projectMemberList.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectMember/projectMemberNew.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectMember/projectMemberEdit.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectMember/projectMemberRemove.js') }}" ></script>
+
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectTask/projectTaskList.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectTask/projectTaskNew.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectTask/projectTaskEdit.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/projectTask/projectTaskRemove.js') }}" ></script>
 
 		<!--==============SERVICE====================-->
 		<script type="text/javascript" src="{{ asset('build/js/services/url.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/projectNote.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/projectFile.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/projectMember.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/projectTask.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/project.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/user.js') }}" ></script>
 
