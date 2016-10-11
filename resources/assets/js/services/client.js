@@ -4,7 +4,11 @@ angular.module('app.service')
            return $resource(appConfig.baseUrl+'client/:id',{id: '@id'},{
                update:{
                    method:'PUT',
-               }
+               },
+               'get': {
+                   method:'GET',
+                   isArray:true
+               },
 
 
            });

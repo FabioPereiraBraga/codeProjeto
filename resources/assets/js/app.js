@@ -37,12 +37,17 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
         },
         utils:{
             transformRequest:function(data){
+
+
+
               if(angular.isObject(data)){
                  return  $httpParamSerializerProvider.$get()(data);
               }
                 return data;
             },
             transformResponse: function (data,headers) {
+
+
                 var headersGetter = headers();
 
                 if( headersGetter['content-type'] == 'application/json' ||
@@ -77,7 +82,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-        $httpProvider.defaults.transformRequest  = appConfigProvider.config.utils.transformRequest;
+        $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
 
