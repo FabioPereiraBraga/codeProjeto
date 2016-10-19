@@ -34,7 +34,8 @@
                        <thead>
                        <tr>
                            <th> Name </th>
-
+                           <th> Start Date </th>
+                           <th> Due Date </th>
                            <th>Status</th>
 
                        </tr>
@@ -43,7 +44,8 @@
                        <tbody>
                          <tr ng-repeat="o in projectTask">
                              <td> {{o.name}} </td>
-
+                             <td> {{o.start_date | dateBr}} </td>
+                             <td> {{o.due_date | dateBr }} </td>
                              <td> {{o.status }} </td>
 
 

@@ -3,14 +3,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Exclusão de Arquivo de Projeto</div>
+                <div class="panel-heading">Exclusão de Task</div>
                 <div class="panel-body">
 
-                    <p>Deseja excluir realmente este arquivo ?</p>
+                    <p>Deseja excluir realmente esta task ?</p>
 
                     <ul>
-                        <li> <strong> Name :</strong> {{ projectFile.name}}</li>
-                        <li> <strong> Description :</strong> {{ projectFile.description}}</li>
+                        <li> <strong> Name :</strong> {{ projectTask.name}}</li>
+                        <li> <strong> Start Date :</strong> {{ projectTask.start_date | dateBr }}</li>
+                        <li> <strong> 	Due Date :</strong> {{ projectTask.due_date | dateBr }}</li>
                     </ul>
 
                     <div class="form-group">

@@ -3,34 +3,41 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Listagen de Membros de Projetos</div>
+                <div class="panel-heading">
+
+                    Listagen de Membros
+
+
+                </div>
                 <div class="panel-body">
 
-                    <p>
-                       Name: {{ projectMember.name }}
-                    </p>
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Start Date </th>
+                            <th> Due Date </th>
+                            <th>Status</th>
 
-                    <p>
-                       Description: {{ projectMember.description }}
-                    </p>
+                        </tr>
+                        </thead>
 
-                    <table class="table table-condensed table-responsive">
-                       <thead>
-                       <tr>
-                           <th> Name </th>
+                        <tbody>
+                        <tr ng-repeat="o in projectTask">
+                            <td> {{o.name}} </td>
+                            <td> {{o.start_date | dateBr}} </td>
+                            <td> {{o.due_date | dateBr }} </td>
+                            <td> {{o.status }} </td>
 
-                       </tr>
-                       </thead>
 
-                       <tbody>
-                         <tr ng-repeat="o in projectMember.members.data">
+                            <td>
+                                <a ng-href="#/project/{{o.project_id}}/task/{{o.id}}/edit">Editar </a> |
+                                <a ng-href="#/project/{{o.project_id}}/task/{{o.id}}/remove">Excluir </a>
+                            </td>
+                        </tr>
+                        </tbody>
 
-                             <td> {{o.name}} </td>
-
-                         </tr>
-                       </tbody>
-
-                   </table>
+                    </table>
 
 
 

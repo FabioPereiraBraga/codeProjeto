@@ -1,7 +1,7 @@
 angular.module('app.controllers')
     .controller('ProjectTaskNewController',
             ['$scope','$location', '$routeParams','appConfig','ProjectTask','Project',
-            function ($scope, $location,  $routeParams ,appConfig , ProjectTask,Project) {
+            function ($scope, $location,  $routeParams ,appConfig , ProjectTask) {
 
                 $scope.status = appConfig.projectTask.status;
 
@@ -28,33 +28,7 @@ angular.module('app.controllers')
                     $scope.start_date.status.opened = true;
                 };
 
-
-                $scope.formatName = function(model)
-                {
-                    if(model)
-                    {
-                        return model.name;
-                    }
-                    return '';
-                };
-
-                $scope.getProject = function(event,name)
-                {
-
-                    return Project.query({
-                        search:name,
-                        searchFields:'name:like'
-                    }).$promise;
-
-                };
-
-                $scope.selectProject = function(item)
-                {
-                    $scope.projectTask.project_id = item.project_id;
-                };
-
-
-                
+ 
                 $scope.projectTask = new ProjectTask();
 
            $scope.save = function() {

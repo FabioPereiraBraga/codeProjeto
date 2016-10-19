@@ -3,18 +3,20 @@ angular.module('app.controllers')
         ['$scope','$location','$routeParams','ProjectTask' ,
  function ($scope, $location, $routeParams, ProjectTask) {
 
-            $scope.projectTask = ProjectTask.get({
+            $scope.projectTask = ProjectTask.find({
                 id: $routeParams.id,
-                idFile:$routeParams.idFile
+                idTask:$routeParams.idTask
             });
 
 
 
+
             $scope.remove = function () {
+
+
                 $scope.projectTask.$delete({
                     id:$routeParams.id,
-                    idFile:$scope.projectTask.id
-                }).then(function(){
+                    idTask:$routeParams.idTask}).then(function(){
                     $location.path('/project/'+$routeParams.id+'/task');
                 });
 
