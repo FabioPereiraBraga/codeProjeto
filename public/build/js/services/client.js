@@ -9,6 +9,7 @@ angular.module('app.service')
                    method:'GET',
                    isArray:true
                },
+               
 
 
            });

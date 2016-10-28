@@ -1,6 +1,6 @@
 angular.module('app.controllers')
-    .controller('ProjectTaskListController',['$scope','$routeParams' , '$location','ProjectTask',
-                                    function ($scope , $routeParams,$location ,ProjectTask) {
+    .controller('ProjectTaskListController',['$scope','$routeParams' , '$location','ProjectTask', $route,
+                                    function ($scope , $routeParams,$location ,ProjectTask, $route) {
 
 
                                         
@@ -23,7 +23,7 @@ angular.module('app.controllers')
 
                                                     newProject.$save({id:$routeParams.id}).then(function () {
 
-                                                        window.location.reload();
+                                                        $route.reload();
 
 
                                                 });
