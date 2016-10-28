@@ -15,15 +15,15 @@ class ProjectMembers extends Model implements Transformable
         'user_id'
     ];
 
-    public function user ()
+    public function users ()
     {
-        return $this->belongsToMany(User::class, 'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
 
     
     public function project ()
     {
-        return $this->belongsToMany(Project::class,'project_id');
+        return $this->belongsTo(Project::class,'project_id');
     }
 
 

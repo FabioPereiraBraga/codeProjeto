@@ -3,8 +3,11 @@ angular.module('app.controllers')
                                     function ($scope , $routeParams,ProjectMember) {
 
 
-        $scope.projectMember = ProjectMember.get({'id':$routeParams.id});
+        $scope.projectMembers = ProjectMember.get({'id':$routeParams.id});
 
+
+    
+                                        
 
 
     }]);

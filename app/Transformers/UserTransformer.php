@@ -8,8 +8,7 @@
 
 namespace CodeProject\Transformers;
 
-use CodeProject\Entities\Project;
-use CodeProject\Entities\ProjectMembers;
+
 use CodeProject\Entities\User;
 use League\Fractal\TransformerAbstract;
 

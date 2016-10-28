@@ -5,7 +5,12 @@ angular.module('app.service')
            return $resource(appConfig.baseUrl+'project/:id/members/:idMember',{id: '@id' , idMember:'@idMember'},{
                update:{
                    method:'PUT'
+
                },
+               get:{
+                   method:'GET',
+                   isArray:true
+               }
                
            });
            
