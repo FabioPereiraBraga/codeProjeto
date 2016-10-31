@@ -63,6 +63,8 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
                     return dataJson;
                 }
 
+               
+
                 return data;
             }
             
@@ -168,11 +170,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             templateUrl:'build/views/project-member/new.html',
             controller:'ProjectMemberNewController'
         })
-        .when('/project/:id/member/:idMembre/edit',{
+        .when('/project/:id/member/:idMember/edit',{
             templateUrl:'build/views/project-member/edit.html',
             controller:'ProjectMemberEditController'
         })
-        .when('/project/:id/member/:idMembre/remove',{
+        .when('/project/:id/member/:idMember/remove',{
             templateUrl:'build/views/project-member/remove.html',
             controller:'ProjectMemberRemoveController'
         })

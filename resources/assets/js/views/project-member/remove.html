@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Exclusão de Arquivo de Projeto</div>
+                <div class="panel-heading">Exclusão de Membro do Projeto</div>
                 <div class="panel-body">
 
-                    <p>Deseja excluir realmente este arquivo ?</p>
+                    <p>Deseja excluir realmente esse membro?</p>
 
                     <ul>
-                        <li> <strong> Name :</strong> {{ projectFile.name}}</li>
-                        <li> <strong> Description :</strong> {{ projectFile.description}}</li>
+                        <li> <strong> Name :</strong> {{projectMember.users.data.name}}</li>
+                        <li> <strong> Email :</strong> {{projectMember.users.data.email}}</li>
                     </ul>
 
                     <div class="form-group">

@@ -80,6 +80,7 @@ class ProjectMemberController extends Controller
 
     public function destroy($id , $idMember)
     {
+    
         return $this->service->delete( $idMember );
     }
 }

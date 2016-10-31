@@ -14,14 +14,12 @@
                             <div class="col-md-6">
                                 <input type="text" name="client_id" class="form-control"
                                        ng-model="clientUser",
-                                       typeahead="o as o.name for o in getUser($viewValue) |limitTo:4"
+                                       typeahead="o as o.name for o in getUser($viewValue)|limitTo:10"
                                        typeahead-on-select="selectUser($item)"
                                        typeahead-editable="false"
                                        required
                                 />
-                                <div ng-messages="form.name.$error" class="help-block" ng-show="form.name.$touched">
-                                    <div class="" ng-message="required"> Campo Obigatorio</div>
-                                </div>
+
                             </div>
                         </div>
 
@@ -49,7 +47,7 @@
 
 
                             <td>
-                                <a ng-href="#/project/{{o.project_id}}/member/{{o.id}}/edit">Editar </a> |
+
                                 <a ng-href="#/project/{{o.project_id}}/member/{{o.id}}/remove">Excluir </a>
                             </td>
                         </tr>

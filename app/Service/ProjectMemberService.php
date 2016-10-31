@@ -105,7 +105,8 @@ class ProjectMemberService
     public function delete( $id )
     {
         try {
-            $this->repository->delete($id);
+          
+            $this->repository->delete($id) ;
 
             return [
                 'Error' => false,

@@ -1,9 +1,12 @@
 angular.module('app.controllers')
-    .controller('ProjectMemberListController',['$scope','$routeParams' ,'ProjectMember' , 'User','$route',
-                                    function ($scope , $routeParams,ProjectMember,User,$route) {
+    .controller('ProjectMemberListController',['$scope','$routeParams' ,'$route','ProjectMember' , 'User',
+                                    function ($scope , $routeParams,$route,ProjectMember,User) {
 
 
-        $scope.projectMembers = ProjectMember.get({'id':$routeParams.id});
+        $scope.projectMembers = ProjectMember.get({'id':$routeParams.id,
+        orderBy:'id',
+        sortedBy:'desc'
+        });
         var newProjectMember  = new ProjectMember();
 
 

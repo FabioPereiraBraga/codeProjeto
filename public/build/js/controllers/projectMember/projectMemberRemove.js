@@ -1,11 +1,11 @@
 angular.module('app.controllers')
-    .controller('ProjectFileRemoveController',
+    .controller('ProjectMemberRemoveController',
         ['$scope','$location','$routeParams','ProjectMember' ,
  function ($scope, $location, $routeParams, ProjectMember) {
 
-            $scope.projectMember = ProjectMember.get({
+            $scope.projectMember = ProjectMember.find({
                 id: $routeParams.id,
-                idFile:$routeParams.idFile
+                idMember:$routeParams.idMember
             });
 
 
@@ -13,9 +13,9 @@ angular.module('app.controllers')
             $scope.remove = function () {
                 $scope.projectMember.$delete({
                     id:$routeParams.id,
-                    idFile:$scope.projectMember.id
+                    idMember:$scope.projectMember.id
                 }).then(function(){
-                    $location.path('/project/'+$routeParams.id+'/member');
+                    $location.path('/project/'+$routeParams.id+'/members');
                 });
 
 
