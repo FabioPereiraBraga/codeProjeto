@@ -117,6 +117,7 @@
 
 		<!--==============SERVICE====================-->
 		<script type="text/javascript" src="{{ asset('build/js/services/url.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/oauthFixInterceptor.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/projectNote.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/projectFile.js') }}" ></script>
@@ -124,6 +125,8 @@
 		<script type="text/javascript" src="{{ asset('build/js/services/projectTask.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/project.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/services/user.js') }}" ></script>
+
+
 
 		<!--==============FILTER====================-->
 		<script type="text/javascript" src="{{ asset('build/js/filters/date-br.js') }}" ></script>
