@@ -13,6 +13,9 @@ angular.module('app.controllers')
                 });
             });
 
+            
+
+
             $scope.status = appConfig.project.status;
             $scope.due_date = {
                 status:{

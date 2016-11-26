@@ -9,6 +9,10 @@ angular.module('app.service')
                    method:'GET',
                    isArray:true
                },
+               'find': {
+                   method:'GET',
+                   isArray:false
+               },
                
 
 
