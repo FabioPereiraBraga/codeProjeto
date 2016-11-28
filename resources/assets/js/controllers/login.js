@@ -8,9 +8,10 @@ angular.module('app.controllers')
      }
 
      $scope.error = {
-         mesage: '',
+         message: '',
          error:false
      }
+
      $scope.login = function() {
          if ($scope.form.$valid) {
              OAuth.getAccessToken($scope.user).then(function (  ) {
