@@ -1,6 +1,6 @@
 angular.module('app.controllers')
-    .controller('LoginModalController',['$scope','$location','$modalInstance', '$cookies','User','OAuth', 'authService',
-        function ($scope , $location , $modalInstance ,$cookies , User ,OAuth , authService) {
+    .controller('LoginModalController',['$scope','$rootScope','$location','$modalInstance', '$cookies','User','OAuth', 'authService','OAuthToken',
+        function ($scope , $rootScope , $location , $modalInstance ,$cookies , User ,OAuth , authService,OAuthToken) {
 
             $scope.user = {
                 username:'',
@@ -21,6 +21,11 @@ angular.module('app.controllers')
                 $rootScope.loginModalOpened = false;
                 $modalInstance.dismiss('cancel');
             });
+
+            $scope.$on('event:auth-loginCancelled' , function(){
+                OAuthToken.removeToken();
+            });
+
             $scope.login = function() {
                 if ($scope.form.$valid) {
                     OAuth.getAccessToken($scope.user).then(function (  ) {

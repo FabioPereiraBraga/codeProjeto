@@ -86,6 +86,8 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
+        $httpProvider.interceptors.splice(0,1);
+        $httpProvider.interceptors.splice(0,1);
         $httpProvider.interceptors.push('oauthFixInterceptor');
 
     $routeProvider
@@ -251,7 +253,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
 
 
-    app.run(['$rootScope', '$location','$http','$modal' ,'httpBuffer','OAuth', function($rootScope,$location,$http, $modal , httpBuffer , rOAuth) {
+    app.run(['$rootScope', '$location','$http','$modal' ,'httpBuffer','OAuth', function($rootScope,$location,$http, $modal , httpBuffer , OAuth) {
 
         $rootScope.$on('$routeChangeStart',function(event,next,current){
               if(next.$$route.originalPath != '/login'){
@@ -278,6 +280,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
                     controller: 'LoginModalController'
                 });
                     $rootScope.loginModalOpened = true;
+                    return;
             }
             }
 
