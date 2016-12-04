@@ -5,7 +5,7 @@ var app = angular.module('app',
     [
         'ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
         'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.modal','ui.bootstrap.tpls',
-        'ngFileUpload','app.directives','http-auth-interceptor'
+        'ngFileUpload','app.directives','http-auth-interceptor','angularUtils.directives.dirPagination'
 ]);
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);

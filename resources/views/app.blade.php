@@ -76,6 +76,7 @@
 		<script type="text/javascript" src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/vendor/ng-file-upload.min.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/vendor/http-auth-interceptor.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/vendor/dirPagination.js') }}" ></script>
 
 		<script type="text/javascript" src="{{ asset('build/js/app.js') }}" ></script>
 
