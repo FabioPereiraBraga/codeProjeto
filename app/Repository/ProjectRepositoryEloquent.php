@@ -40,7 +40,7 @@ class ProjectRepositoryEloquent   extends BaseRepository  implements ProjectRepo
         return false;
     }
 
-    public function findWithOwnerAndMenber( $userId )
+  /*  public function findWithOwnerAndMenber( $userId )
     {
         return $this->scopeQuery(function($query) use($userId) {
               return $query->select('projects.*')
@@ -48,7 +48,16 @@ class ProjectRepositoryEloquent   extends BaseRepository  implements ProjectRepo
                      ->where('project_members.id','=',$userId)
                      ->union( $this->model->query()->getQuery()->where('owner_id','=',$userId) );
         })->all();
+    }*/
+
+    public function findOwner( $userId , $limit = null , $colummn = [ ] )
+    {
+        return $this->scopeQuery(function($query) use($userId) {
+            return  $query->select('projects.*')->where('owner_id','=',$userId);
+        })->paginate($limit , $colummn);
+
     }
+
     public function  hasMember( $projectId , $memberId){
 
         $project = $this->skipPresenter()->find( $projectId );

@@ -5,7 +5,8 @@ var app = angular.module('app',
     [
         'ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
         'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.modal','ui.bootstrap.tpls',
-        'ngFileUpload','app.directives','http-auth-interceptor','angularUtils.directives.dirPagination'
+        'ngFileUpload','app.directives','http-auth-interceptor','angularUtils.directives.dirPagination',
+        'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown'
 ]);
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);
@@ -56,7 +57,7 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
                 {
                     var dataJson = JSON.parse(data);
 
-                    if(dataJson.hasOwnProperty('data'))
+                    if(dataJson.hasOwnProperty('data') && Object.keys(dataJson).length === 1)
                     {
                         dataJson = dataJson.data;
                     }
@@ -79,8 +80,8 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
     }
 } ])
 
-app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider',
-    function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider){
+app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider','appConfigProvider','$navbarProvider',
+    function($routeProvider , $httpProvider , OAuthProvider,  OAuthTokenProvider  , appConfigProvider,$navbarProvider){
 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -89,6 +90,10 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
         $httpProvider.interceptors.splice(0,1);
         $httpProvider.interceptors.splice(0,1);
         $httpProvider.interceptors.push('oauthFixInterceptor');
+
+        /*angular.extend($navbarProvider.defaults, {
+            activeClass: 'in'
+        });*/
 
     $routeProvider
         .when('/login',{

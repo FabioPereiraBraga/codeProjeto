@@ -43,7 +43,10 @@ angular.module('app.service')
                update:{
                    method:'PUT',
                    transformRequest: transformData
-               }
+               },
+               query: {
+                   isArray:false
+               },
 
 
            });
