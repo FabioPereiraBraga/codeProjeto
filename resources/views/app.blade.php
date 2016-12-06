@@ -105,6 +105,7 @@
 		<!--==============DIRECTIVES====================-->
 		<script type="text/javascript" src="{{ asset('build/js/directives/projectFileDownload.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/directives/loadTemplate.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/directives/menu-actived.js') }}" ></script>
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	@endif
