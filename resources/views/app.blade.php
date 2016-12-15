@@ -7,10 +7,12 @@
 	<title>Laravel</title>
 
 	@if(Config::get('app.debug'))
-    <link rel="stylesheet" href="{{asset('build/css/app.css')}}" />
-    <link rel="stylesheet" href="{{asset('build/css/components.css')}}" />
+
     <link rel="stylesheet" href="{{asset('build/css/flaticon.css')}}" />
     <link rel="stylesheet" href="{{asset('build/css/font-awesome.css')}}" />
+		<link rel="stylesheet" href="{{asset('build/css/components.css')}}" />
+		<link rel="stylesheet" href="{{asset('build/css/app.css')}}" />
+
 	@else
 	<link rel="stylesheet" href="{{ elixir('css/all.css') }}" />
 	@endif
@@ -54,6 +56,7 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientEdit.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientRemove.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientView.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientDashboard.js') }}" ></script>
 
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteList.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectNote/projectNoteNew.js') }}" ></script>

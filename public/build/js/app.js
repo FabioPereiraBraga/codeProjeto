@@ -6,7 +6,7 @@ var app = angular.module('app',
         'ngRoute' ,'angular-oauth2', 'app.controllers','app.service','app.filters',
         'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.modal','ui.bootstrap.tpls',
         'ngFileUpload','app.directives','http-auth-interceptor','angularUtils.directives.dirPagination',
-        'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown'
+        'ui.bootstrap.dropdown'
 ]);
 
 angular.module('app.controllers',[ 'ngMessages','angular-oauth2' ]);
@@ -57,7 +57,9 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
                 {
                     var dataJson = JSON.parse(data);
 
-                    if(dataJson.hasOwnProperty('data') && Object.keys(dataJson).length === 1)
+                    if(dataJson.hasOwnProperty('data') &&
+                        Object.keys(dataJson).length === 1 &&
+                        !dataJson.hasOwnProperty('meta') )
                     {
                         dataJson = dataJson.data;
                     }
@@ -112,6 +114,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
             templateUrl:'build/views/home.html',
             controller:'HomeController',
             title:'Home'
+        })
+        .when('/clients/dashboard',{
+            templateUrl:'build/views/client/dashboard.html',
+            controller:'ClientDashboardController',
+            title:'Clients'
         })
         .when('/clients',{
             templateUrl:'build/views/client/list.html',
