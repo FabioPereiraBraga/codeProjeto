@@ -147,7 +147,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
         })
 
 
-
+        .when('/projects/dashboard',{
+            templateUrl:'build/views/project/dashboard.html',
+            controller:'ProjectsDashboardController',
+            title:'Projects'
+        })            
         .when('/project/:id/notes',{
             templateUrl:'build/views/project-note/list.html',
             controller:'ProjectNoteListController',
@@ -222,6 +226,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
          // Rotas Project Task
 
+        .when('/task/dashboard',{
+            templateUrl:'build/views/project-task/dashboard.html',
+            controller:'TaskDashboardController',
+            title:'Task'
+        })
         .when('/project/:id/task',{
             templateUrl:'build/views/project-task/list.html',
             controller:'ProjectTaskListController',

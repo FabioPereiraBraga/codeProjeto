@@ -3,7 +3,7 @@ angular.module('app.controllers')
                 ['$scope','$location','$routeParams','Client' , 
         function ($scope, $location, $routeParams, Client) {
 
-            $scope.client = Client.get({id: $routeParams.id});
+            $scope.client = Client.find({id: $routeParams.id});
 
           
             $scope.save = function () {
