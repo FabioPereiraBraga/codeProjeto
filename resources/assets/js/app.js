@@ -23,14 +23,14 @@ app.provider('appConfig' ,['$httpParamSerializerProvider' ,function ( $httpParam
             status:[
             {value:'1',label:'Não Iniciado'},
             {value:'2',label:'Iniciado'},
-            {value:'1',label:'Concluido'}
+            {value:'3',label:'Concluido'}
             ]
         },
         projectTask:{
             status:[
                 {value:'1',label:'Não Iniciado'},
                 {value:'2',label:'Iniciado'},
-                {value:'1',label:'Concluido'}
+                {value:'3',label:'Concluido'}
             ]
         },
         urls:{
@@ -113,7 +113,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
         .when('/home',{
             templateUrl:'build/views/home.html',
             controller:'HomeController',
-            title:'Home'
+            title:'Projetos'
         })
         .when('/clients/dashboard',{
             templateUrl:'build/views/client/dashboard.html',
@@ -149,7 +149,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider','OAuthTokenProvider
 
         .when('/projects/dashboard',{
             templateUrl:'build/views/project/dashboard.html',
-            controller:'ProjectsDashboardController',
+            controller:'ProjectDashboardController',
             title:'Projects'
         })            
         .when('/project/:id/notes',{

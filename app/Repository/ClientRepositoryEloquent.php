@@ -17,7 +17,8 @@ class ClientRepositoryEloquent   extends BaseRepository  implements ClienteRepos
 
     protected $fieldSearchable =[
       'name',
-      'email'
+      'email',
+      'id'
     ];
     /**
      * Specify Model class name

@@ -1,67 +1,32 @@
 angular.module('app.controllers')
     .controller('ProjectDashboardController',
-                ['$scope','$location','$routeParams','Project' , 'Client','appConfig','$cookies','$filter',
-        function ($scope, $location, $routeParams, Project,Client,appConfig,$cookies,$filter) {
+                ['$scope','$location','$routeParams','Project' , '$filter',
+        function ($scope, $location, $routeParams, Project,$filter) {
 
-
-            Project.get({id: $routeParams.id},function(data)
-            {
-                $scope.project = data;
-                Client.get({id:data.client_id},function(data)
-                {
-                   $scope.clientSelect = data;
-                });
+            $scope.project = {
+                
+            };
+            
+            Project.query({
+                orderBy:'created_at',
+                sortedBy:'asc',
+                limit:5
+            },function(response){
+                $scope.projects  = response.data;
+                $scope.project = response.data[ 0 ];
             });
 
+           
             
+              $scope.selectProject = function( o )
+              {
 
-
-            $scope.status = appConfig.project.status;
-            $scope.due_date = {
-                status:{
-                    opened:false
-                }
-            }
-            $scope.open = function() {
-
-                $scope.due_date.status.opened = true;
-            };
-            $scope.formatName = function(model)
-            {
-                if(model)
-                {
-                   return model.name;
-                }
-                return '';
-            };
-
-            $scope.getClients = function(name)
-            {
-                return Client.query({
-                    search:name,
-                    searchFields:'name:like'
-                }).$promise;
-
-            };
-
-            $scope.selectClient = function(item)
-            {
-                $scope.project.client_id = item.id;
-            }
-
-            $scope.save = function() {
-
-
-                if( $scope.form.$valid ) {
-                    $scope.project.owner_id = $cookies.getObject('user').id;
-
-                    Project.update({id:$scope.project.project_id},$scope.project , function(){
-                        $location.path('/project');
-                    });
-
-                }
-            };
-
+                  $scope.project = o;
+              }
+            
+            
+           
+           
 
 
         }]);

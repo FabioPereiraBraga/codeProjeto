@@ -9,11 +9,13 @@
 namespace CodeProject\Transformers;
 
 use CodeProject\Entities\Project;
+use CodeProject\Entities\ProjectFile;
+use CodeProject\Entities\ProjectMembers;
 use League\Fractal\TransformerAbstract;
 
 class ProjectTransformer extends  TransformerAbstract
 {
-    protected $defaultIncludes = ['note','client'];
+    protected $defaultIncludes = ['note','tasks','files','client'];
 
       public function transform(Project $project)
       {
@@ -26,7 +28,9 @@ class ProjectTransformer extends  TransformerAbstract
               'progress'=>(int) $project->progress,
               'status'=>$project->status,
               'due_date'=>$project->due_date,
-              'is_member'=>$project->owner_id != \Authorizer::getResourceOwnerId()
+              'is_member'=>$project->owner_id != \Authorizer::getResourceOwnerId(),
+              'task_count'=>$project->task->count(),
+              'tasks_opened'=>$this->countTaskOpened( $project )
           ];
 
       }
@@ -39,12 +43,36 @@ class ProjectTransformer extends  TransformerAbstract
     }
 
 
+    public function  includeTasks( Project $project)
+    {
+        return $this->collection($project->task, new ProjectTaskTransformer() );
+    }
+
+    public function  includeFiles( Project $project)
+    {
+        return $this->collection($project->files, new ProjectFileTransformer() );
+    }
+
+
+
     public function includeClient(Project $project)
     {
         return $this->item($project->client, new ClientsTransformer());
     }
 
 
+    public function countTaskOpened( $project )
+    {
+        $count = 0;
+        foreach ($project->task as $o){
+            if($o->status == 1){
+                $count++;
+            }
+        }
+
+        return $count;
+
+    }
 
 
 

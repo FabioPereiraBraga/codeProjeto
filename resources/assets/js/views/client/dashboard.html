@@ -7,18 +7,20 @@
                                 <ul class="boxed-manager-menu-nav">
                                     <li class="boxed-manager-menu-nav-header">
                                         <h3 class="h4">
-                                            Clientes
 
-                                            <div class="btn-group pull-right">
+
+                                            <div class="btn-group pull-left">
                                                 <label class="select-styled select-styled-default select-styled-sm">
-                                                    <select>
-                                                        <option selected="selected">A</option>
-                                                        <option>B</option>
-                                                        <option>C</option>
-                                                        <option>D</option>
-                                                        <option>E</option>
-                                                        <option>F</option>
+
+
+
+                                                    <select ng-options="o.id as o.name for o in names"
+                                                            ng-model="clienteName"
+                                                            ng-change="filterClientName()" >
+                                                      <option value=""> Clientes </option>
                                                     </select>
+
+
                                                 </label>
                                                 <a href="#/clients/new" class="btn btn-default btn-sm">
                                                     <i class="fa fa-plus"></i>

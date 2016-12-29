@@ -29,6 +29,8 @@
 
  <div ng-view></div>
 
+<load-template url="build/views/templates/footer.html"></load-template>
+
 	@if(Config::get('app.debug'))
 		<script type="text/javascript" src="{{ asset('build/js/vendor/jquery.min.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/vendor/angular.min.js') }}" ></script>
@@ -69,6 +71,7 @@
 		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectEdit.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectRemove.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectView.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project/projectDashboard.js') }}" ></script>
 
 
 		<script type="text/javascript" src="{{ asset('build/js/controllers/projectFile/projectFileList.js') }}" ></script>
@@ -104,11 +107,14 @@
 
 		<!--==============FILTER====================-->
 		<script type="text/javascript" src="{{ asset('build/js/filters/date-br.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/filters/uniqueNameLimit.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/filters/coverterStatus.js') }}" ></script>
 
 		<!--==============DIRECTIVES====================-->
 		<script type="text/javascript" src="{{ asset('build/js/directives/projectFileDownload.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/directives/loadTemplate.js') }}" ></script>
 		<script type="text/javascript" src="{{ asset('build/js/directives/menu-actived.js') }}" ></script>
+		<script type="text/javascript" src="{{ asset('build/js/directives/tab.js') }}" ></script>
 	@else
      <script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	@endif
