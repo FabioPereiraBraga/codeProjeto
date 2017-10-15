@@ -16,12 +16,12 @@ class CreateProjectTable extends Migration
             $table->increments('id');
             $table->integer('owner_id')->unsigned();
             $table->foreign('owner_id')->references('id')->on('users');
-            $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clients');
             $table->string('name');
             $table->text('description');
-            $table->unsignedSmallInteger('progress');
-            $table->unsignedSmallInteger('status');
+            $table->smallInteger('progress');
+            $table->smallInteger('status');
             $table->date('due_date');
             $table->timestamps();
         });

@@ -58,6 +58,7 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
+
      return  $this->servico->show($id);
     }
 

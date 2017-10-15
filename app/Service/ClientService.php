@@ -134,22 +134,23 @@ class ClientService
 
     public  function show($id)
     {
+
         try{
 
         return $this->repository->find($id);
 
-        } catch (ModelNotFoundException $e) {
+        }  catch (\Exception $e) {
+
+            return [
+                'error'=>true,
+                'mensagem'=>'Ocorreu algum erro na consulta pelo cliente'];
+
+        }catch (ModelNotFoundException $e) {
 
             return [
                 'error'=>true,
                 'mensagem'=>'Cliente  não encontrado.'
             ];
-
-        } catch (\Exception $e) {
-
-            return [
-                'error'=>true,
-                'mensagem'=>'Ocorreu algum erro na consulta pelo cliente'];
 
         }
 
