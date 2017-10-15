@@ -1,0 +1,127 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Cadastro de Project</div>
+                <div class="panel-body">
+
+                    <form class="form-horizontal"  name="form" role="form" method="POST"  ng-submit="save()">
+
+
+                        <div class="form-group" ng-class="{'has-error':!form.name.$valid && form.name.$touched}">
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" ng-model="project.name" required>
+                                <div ng-messages="form.name.$error" class="help-block" ng-show="form.name.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group" ng-class="{'has-error':!form.client_id.$valid && form.client_id.$touched}">
+                            <label class="col-md-4 control-label">Client</label>
+                            <div class="col-md-6">
+
+                                <input type="text" name="client_id" class="form-control"
+                                       ng-model="clientSelect",
+                                       typeahead="o as o.name for o in getClients($viewValue) |limitTo:4"
+                                       typeahead-input-formatter="formatName($model)"
+                                       typeahead-on-select="selectClient($item)"
+                                       typeahead-editable="false"
+                                       required
+                                />
+
+                                <div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                    <div class="" ng-message="editable"> Selecione um client valido</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group" ng-class="{'has-error':!form.progress.$valid && form.progress.$touched}">
+                            <label class="col-md-4 control-label">Progress (%)</label>
+                            <div class="col-md-6">
+                                <input type="number"   min="0" max="100" class="form-control" name="progress" ng-model="project.progress" required>
+                                <div ng-messages="form.progress.$error" class="help-block" ng-show="form.progress.$touched">
+                                     <div class="" ng-message="required"> Campo Obigatorio</div>
+                                     <div class="" ng-message="min"> Valor mínimo aceitável é 0</div>
+                                     <div class="" ng-message="max"> Valor máximo aceitável é 100</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error':!form.status.$valid && form.status.$touched}">
+                            <label class="col-md-4 control-label">Status</label>
+                            <div class="col-md-6">
+                                <select ng-options="o.value as o.label for o in status "  name="status" class="form-control"
+                                        ng-model="project.status" required>
+                                    <option value="">-- Selecione --</option>
+                                </select>
+
+                                <div ng-messages="form.status.$error" class="help-block" ng-show="form.status.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" ng-class="{'has-error':!form.due_date.$valid && form.due_date.$touched}">
+                            <label class="col-md-4 control-label">Date</label>
+                            <div class="col-md-6">
+
+                                <p class="input-group">
+                               <input type="text" class="form-control" name="due_date"
+                                      ng-model="project.due_date"
+                                      datepicker-popup="dd/MM/yyyy"
+                                      is-open="due_date.status.opened"
+                                      close-text="Close"
+                                      required
+                                       />
+                               <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                                </p>
+
+
+
+                                <div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                    <div class="" ng-message="date"> Data invalida</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group" ng-class="{'has-error':!form.description.$valid && form.description.$touched}">
+                            <label class="col-md-4 control-label"> Observação </label>
+                            <div class="col-md-6">
+                                <textarea  class="form-control" name="description" ng-model="project.description" required></textarea>
+                                <div ng-messages="form.description.$error" class="help-block" ng-show="form.description.$touched">
+                                    <div class="" ng-message="required"> Campo Obigatorio</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+
+                   </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

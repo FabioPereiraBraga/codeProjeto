@@ -1,6 +1,10 @@
 /vendor
+/nbproject
 /node_modules
 Homestead.yaml
 Homestead.json
 .env
 /.idea
+
+resources/bower_components
+/nbproject/private/

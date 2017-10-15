@@ -4,8 +4,10 @@ namespace CodeProject\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Clients extends Model
 {
+
 
       protected $fillable = [
           'name',
@@ -15,5 +17,11 @@ class Clients extends Model
           'address',
           'obs'
 ];
+
+      public function projects()
+      {
+            return $this->hasMany(Project::class, 'client_id');
+
+      }
     
 }

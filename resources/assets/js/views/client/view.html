@@ -1,0 +1,78 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Cadastro de Clientes</div>
+                <div class="panel-body">
+
+                    <form class="form-horizontal"  name="form" role="form" method="POST"  ng-submit="voltar()">
+
+
+
+                        <div class="form-group" >
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" ng-model="client.name" disabled >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-md-4 control-label"> Resposible </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="responsible" ng-model="client.responsible" disabled>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-md-4 control-label"> Email </label>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" ng-model="client.email" disabled>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-md-4 control-label"> Phone </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="phone" ng-model="client.phone" disabled>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label class="col-md-4 control-label"> Address </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="address" ng-model="client.address" disabled>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label class="col-md-4 control-label"> Observação </label>
+                            <div class="col-md-6">
+                                <textarea  class="form-control" name="obs" ng-model="client.obs" disabled ></textarea>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Voltar</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
